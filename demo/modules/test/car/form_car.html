@@ -1,0 +1,42 @@
+<script src="jquery.min.js"></script>
+<form action="">
+  ชื่อ : <br>
+  <input type="text" name="customer_name" id="customer_name"><br>
+  ประเภทรถ : <br>
+  <input type="radio" name="drive_type" value="car" id="radio_button_car"> car<br>
+  <div id="detail_car">
+      ยี่ห้อรถยนต์ : <input type="text" name="car_one" id="car_one"><br>
+      ยี่ห้อรถยนต์ : <input type="text" name="car_two" id="car_two"><br>
+  </div>
+  <input type="radio" name="drive_type" value="byc" id="radio_button_byc"> byc<br>
+  <div id="detail_byc">
+      ยี่ห้อจักรยาน : <input type="text" name="byc_one" id="byc_one"><br>
+      ยี่ห้อจักรยาน : <input type="text" name="byc_two" id="byc_two"><br>
+  </div>
+</form>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#detail_byc').hide();
+        $('#detail_car').hide();
+        });
+    $('#radio_button_car').click(function(){
+        clear_data();
+        $('#detail_byc').hide();
+        $('#detail_car').show();
+    });
+
+    $('#radio_button_byc').click(function(){
+        clear_data();
+        $('#detail_car').hide();
+        $('#detail_byc').show();
+    });
+
+    function clear_data(){
+        $('#byc_one').val('');
+        $('#byc_two').val('');
+        $('#car_one').val('');
+        $('#car_two').val('');
+
+    }
+</script>

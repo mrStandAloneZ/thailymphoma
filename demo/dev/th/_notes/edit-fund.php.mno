@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_fund" value="name:fund_id;datatype:int,name:fund_name;datatype:string,name:fund_desc;datatype:blob,name:active_flag;datatype:string,name:register_dt;datatype:datetime" />
+</info>

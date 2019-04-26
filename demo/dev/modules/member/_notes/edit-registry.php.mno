@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_institute" value="name:institute;datatype:string" />
+	<infoitem key="UD_max" value="name:next_row;datatype:int" />
+	<infoitem key="UD_all_instiute" value="name:institute;datatype:string,name:fullname;datatype:string" />
+	<infoitem key="UD_province" value="name:province_id;datatype:int,name:province_name;datatype:string" />
+	<infoitem key="UD_biopsy_site" value="name:biopsy_id;datatype:int,name:biopsy_name;datatype:string" />
+	<infoitem key="UD_hl" value="name:hl_id;datatype:int,name:hl_name;datatype:string" />
+	<infoitem key="UD_immu" value="name:nhl_id;datatype:int,name:nhl_name;datatype:string" />
+	<infoitem key="UD_who" value="name:who_id;datatype:int,name:who_name;datatype:string" />
+	<infoitem key="UD_working" value="name:working_id;datatype:int,name:working_name;datatype:string" />
+	<infoitem key="UD_patient" value="name:patient_id;datatype:int,name:record_dt;datatype:date,name:code;datatype:string,name:patient_init;datatype:string,name:gender;datatype:string,name:personal_id;datatype:string,name:hn;datatype:string,name:birth_dt;datatype:date,name:address;datatype:int,name:payment_id;datatype:int,name:biopsy_report_dt;datatype:date,name:Pathology_no;datatype:string,name:biopsy_id;datatype:int,name:hl_id;datatype:int,name:nhl_id;datatype:int,name:who_id;datatype:int,name:working_id;datatype:int,name:other_type;datatype:blob,name:ann_arbor_id;datatype:int,name:other_extranodal;datatype:blob,name:ecog;datatype:string,name:ldh;datatype:string,name:hiv;datatype:string,name:register_dt;datatype:datetime,name:register_by;datatype:string,name:active_flag;datatype:string" />
+	<infoitem key="UD_patient_extranodal" value="name:code;datatype:string,name:extranodal_id;datatype:int,name:register_dt;datatype:datetime" />
+</info>

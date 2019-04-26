@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_calendar" value="name:calendar_id;datatype:int,name:calandar_name;datatype:string,name:calendar_desc;datatype:blob,name:calendar_date;datatype:date,name:register_dt;datatype:datetime,name:register_by;datatype:string" />
+</info>

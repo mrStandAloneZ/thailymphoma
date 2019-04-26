@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_all_content" value="name:content_id;datatype:int,name:header;datatype:string" />
+	<infoitem key="UD_patient" value="name:patient_id;datatype:int,name:record_dt;datatype:date,name:code;datatype:string,name:province;datatype:string" />
+	<infoitem key="UD_institute" value="name:institute;datatype:string,name:institute_full;datatype:string" />
+	<infoitem key="UD_sentmessege" value="name:messege_id;datatype:int,name:sender;datatype:string,name:receiver;datatype:string,name:subject;datatype:string,name:detail;datatype:blob,name:reply_flag;datatype:string,name:read_flag;datatype:string,name:register_dt;datatype:datetime" />
+	<infoitem key="UD_user" value="name:institute;datatype:string" />
+	<infoitem key="UD_messege" value="name:messege_id;datatype:int,name:sender;datatype:string,name:receiver;datatype:string,name:owner;datatype:string,name:subject;datatype:string,name:detail;datatype:blob,name:reply_flag;datatype:string,name:read_flag;datatype:string,name:register_dt;datatype:datetime" />
+</info>

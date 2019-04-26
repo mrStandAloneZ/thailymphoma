@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_content" value="name:content_id;datatype:int,name:header;datatype:string,name:detail;datatype:blob" />
+</info>

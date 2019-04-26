@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_institute" value="name:institute;datatype:string" />
+	<infoitem key="UD_max" value="name:next_row;datatype:int" />
+	<infoitem key="UD_all_instiute" value="name:institute;datatype:string,name:fullname;datatype:string" />
+	<infoitem key="UD_province" value="name:province_id;datatype:int,name:province_name;datatype:string" />
+	<infoitem key="UD_biopsy_site" value="name:biopsy_id;datatype:int,name:biopsy_name;datatype:string" />
+	<infoitem key="UD_hl" value="name:hl_id;datatype:int,name:hl_name;datatype:string" />
+	<infoitem key="UD_immu" value="name:nhl_id;datatype:int,name:nhl_name;datatype:string" />
+	<infoitem key="UD_who" value="name:who_id;datatype:int,name:who_name;datatype:string" />
+	<infoitem key="UD_working" value="name:working_id;datatype:int,name:working_name;datatype:string" />
+</info>

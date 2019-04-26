@@ -1,0 +1,50 @@
+<html>
+<head>
+	<title>ThaiCreate.Com</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+<script language="javascript">
+function selValue()
+{
+	var val = '';
+	for(i=1;i<=frmPopup.hdnLine.value;i++)
+	{
+		if(eval("frmPopup.Chk"+i+".checked")==true)
+		{
+			val = val + eval("frmPopup.Chk"+i+".value") + ',';
+		}
+	}
+	window.opener.document.getElementById("txtSel").value = val;
+	window.close();
+}
+</script>
+<form action="" method="post" name="frmPopup" id="frmPopup">
+  <table width="185" border="1" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="64"><input name="Chk1" type="checkbox" id="Chk1" value="A"></td>
+      <td width="115">A</td>
+    </tr>
+    <tr>
+      <td><input name="Chk2" type="checkbox" id="Chk2" value="B"></td>
+      <td>B</td>
+    </tr>
+    <tr>
+      <td><input name="Chk3" type="checkbox" id="Chk3" value="C"></td>
+      <td>C</td>
+    </tr>
+    <tr>
+      <td><input name="Chk4" type="checkbox" id="Chk4" value="D"></td>
+      <td>E</td>
+    </tr>
+    <tr>
+      <td><input name="Chk5" type="checkbox" id="Chk5"  value="E"></td>
+      <td>D<input name="Chk5" type="text" id="Chk5"  value=""></td>
+    </tr>
+  </table>
+  <input name="hdnLine" type="hidden" value="5">
+  <br>
+  <input name="btnSelect" type="button" value="Select" onClick="JavaScript:selValue();">
+</form>
+</body>
+</html>

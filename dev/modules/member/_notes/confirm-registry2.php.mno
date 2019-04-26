@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_institute" value="name:institute;datatype:string" />
+	<infoitem key="UD_max" value="name:next_row;datatype:int" />
+	<infoitem key="UD_all_instiute" value="name:institute;datatype:string" />
+	<infoitem key="UD_payment" value="name:payment_name;datatype:string" />
+	<infoitem key="UD_biopsy_site" value="name:biopsy_name;datatype:string" />
+	<infoitem key="UD_ann_arbor" value="name:ann_arbor_stage_name;datatype:string" />
+	<infoitem key="UD_Extranodal" value="name:extranodal_name;datatype:string" />
+	<infoitem key="UD_hl" value="name:hl_name;datatype:string" />
+	<infoitem key="UD_nhl" value="name:nhl_name;datatype:string" />
+	<infoitem key="UD_who" value="name:who_name;datatype:string" />
+	<infoitem key="UD_working" value="name:working_name;datatype:string" />
+	<infoitem key="UD_province" value="name:province_id;datatype:int,name:province_name;datatype:string" />
+</info>

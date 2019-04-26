@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_all_content" value="name:content_id;datatype:int,name:header;datatype:string" />
+	<infoitem key="UD_Recordset1" value="name:doctor_id;datatype:int,name:username;datatype:string,name:name;datatype:string,name:institute;datatype:string" />
+	<infoitem key="UD_doctor" value="name:doctor_id;datatype:int,name:username;datatype:string,name:name;datatype:string,name:institute;datatype:string" />
+	<infoitem key="UD_enewsletter" value="name:newsletter_id;datatype:int,name:title;datatype:string,name:issue;datatype:string,name:file;datatype:string,name:image;datatype:string,name:register_dt;datatype:datetime" />
+</info>

@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_id" value="name:patient_id;datatype:int" />
+	<infoitem key="UD_max" value="name:maxval;datatype:int" />
+</info>

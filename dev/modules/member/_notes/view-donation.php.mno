@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_fund" value="name:fund_name;datatype:string" />
+	<infoitem key="UD_donation" value="name:donation_id;datatype:int,name:name;datatype:string,name:address;datatype:blob,name:telephone;datatype:string,name:telephone_ext;datatype:string,name:money;datatype:real,name:fund_id;datatype:int,name:donation_dt;datatype:date,name:bill_flag;datatype:string,name:register_dt;datatype:datetime,name:fund_name;datatype:string" />
+</info>

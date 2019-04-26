@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_newsletter" value="name:title;datatype:string,name:file;datatype:string,name:image;datatype:string" />
+	<infoitem key="UD_messege" value="name:count(*);datatype:int" />
+</info>

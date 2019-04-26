@@ -1,0 +1,64 @@
+<input type="text" name="" id="txt1" onkeyup="onaction();"><br>
+<input type="text" name="" id="txt2" onkeyup="onaction();"><br>
+
+<input type="checkbox" name="ext_wal" onclick="onaction();"  value="Waldeyer's ring" id="ext_wal"  >  Waldeyer's ring <br>
+<input type="checkbox" name="ext_sin" onclick="onaction();"  value="Sinonasal"  id="ext_sin">   Sinonasal  <br>
+<input type="checkbox" name="ext_sal" onclick="onaction();"  value="Salivary gland"  id="ext_sal">  Salivary gland<br>
+
+<select name="hodgkin_don" id="hodgkin_don1" onchange="onaction();" style="width:300px";>
+    <option  value="">Please select..</option>
+    <option value="01: Classical HL, Nodular sclerosis">01: Classical HL, Nodular sclerosis</option>
+    <option value="02: Classical HL, Mixed cellularity">02: Classical HL, Mixed cellularity </option>
+    <option value="03: Classical HL, Lymphocyte-rich">03: Classical HL, Lymphocyte-rich </option>
+    <option value="04: Classical HL, Lymphocyte-depleted">04: Classical HL, Lymphocyte-depleted </option>
+    <option value="05: HL, Nodular lymphocyte predominant">05: HL, Nodular lymphocyte predominant</option>
+    <option value="06: HL, unclassifiable">06: HL, unclassifiable</option>
+</select><br>
+
+<input type="radio" name="type" onclick="onaction();" value="Done" id="type1"> Hodgkin lymphoma (HL)  <br />
+<input type="radio" name="type" onclick="onaction();" value="Non-Hodgkin"  id="type2"  >   Non-Hodgkin lymphoma (NHL) <br />
+
+<button  type="submit" id="save"  value="save" disabled>
+    Save
+</button>
+<button  type="submit" id="drafts" name="drafts" value="Save drafts"  />
+    Save drafts
+</button>
+<button  type='reset' name='clear' value='Clear'>
+    Clear
+</button>
+
+<script src="jquery.min.js"></script>
+<script type="text/javascript">
+<!--
+		function onaction(){
+			document.getElementById('save').disabled = verify_input();
+		}
+
+        function verify_input(){
+            return  check_input_text()||
+             ! check_checkbox()||
+             ! check_radio()||
+             ! check_selected();
+        }
+
+        function check_input_text(){
+            return document.getElementById('txt1').value=="" ||
+             document.getElementById('txt2').value=="";
+        }
+
+        function check_checkbox(){
+            return $('#ext_wal:checked').val()||
+              $('#ext_sin:checked').val()||
+              $('#ext_sal:checked').val();
+        }
+
+        function check_radio(){
+            return $('#type1:checked').val() || $('#type2:checked').val();
+        }
+
+        function check_selected(){
+            return $('#hodgkin_don1').val();
+        }
+//-->
+</script>

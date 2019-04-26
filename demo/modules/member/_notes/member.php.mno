@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_user" value="name:doctor_id;datatype:int,name:username;datatype:string,name:password;datatype:string,name:name;datatype:string,name:institute;datatype:string,name:inistitute_full;datatype:string,name:email;datatype:string,name:role;datatype:string,name:register_dt;datatype:datetime" />
+	<infoitem key="UD_messege" value="name:count(*);datatype:int" />
+</info>
