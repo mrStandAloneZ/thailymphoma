@@ -1,6 +1,21 @@
 
 <?PHP
-        $connect = mysqli_connect ("db" , "thailympho_dbp", "VB-D#ThaAi#LogCe&","thailympho_dbp") or die (mysqli_connect_error());
+        // local
+$hostname = "db";	
+$user = "thailympho_dbp";	
+$password = "VB-D#ThaAi#LogCe&";
+
+// dev
+// $hostname = "localhost";	
+// $user = "root";	
+// $password = "password";
+
+// production
+// $hostname = "localhost";	
+// $user = "thailympho_dbp";	
+// $password = "VB-D#ThaAi#LogCe&";
+
+        $connect = mysqli_connect ($hostname , $user, $password ,"thailympho_dbp") or die (mysqli_connect_error());
         $connect -> query("SET names utf8");
 
 

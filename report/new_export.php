@@ -1,5 +1,20 @@
 <?php
 
+// local
+$hostname = "db";	
+$user = "thailympho_dbp";	
+$password = "VB-D#ThaAi#LogCe&";
+
+// dev
+// $hostname = "localhost";	
+// $user = "root";	
+// $password = "password";
+
+// production
+// $hostname = "localhost";	
+// $user = "thailympho_dbp";	
+// $password = "VB-D#ThaAi#LogCe&";
+
 $date_save = $_POST['namef']."-".$_POST['minmonth'] . "-" . $_POST['minyear'] ."_".$_POST['maxmonth'] . "-" . $_POST['maxyear'];
 
 
@@ -16,7 +31,7 @@ $code_hospital = $_POST['institute'];
 $mindate = $_POST['minyear'] . "-" . $_POST['minmonth'] . "-01";
 $maxdate = $_POST['maxyear'] . "-" . $_POST['maxmonth'] . "-30";
 
-$objConnect = mysql_connect("db", "thailympho_dbp", "VB-D#ThaAi#LogCe&") or die("Error Connect to Database");
+$objConnect = mysql_connect($hostname, $user, $password) or die("Error Connect to Database");
 // $objConnect = mysql_connect("localhost", "root", "spr1nt3r") or die("Error Connect to Database");
 $objDB = mysql_select_db("thailympho_dbp");
 

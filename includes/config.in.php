@@ -1,5 +1,20 @@
 <?
 
+// local
+$hostname = "db";	
+$user = "thailympho_dbp";	
+$password = "VB-D#ThaAi#LogCe&";
+
+// dev
+// $hostname = "localhost";	
+// $user = "root";	
+// $password = "password";
+
+// production
+// $hostname = "localhost";	
+// $user = "thailympho_dbp";	
+// $password = "VB-D#ThaAi#LogCe&";
+
 //หากมีการเรียกไฟล์นี้โดยตรง
 if (eregi("config.in.php",$PHP_SELF)) {
     Header("Location: ../index.php");
@@ -49,12 +64,11 @@ CAPCHA_TYPE แบบที่ 1 ต้องเซ็ทค่าดังนี้
 //Calendar
 define("USE_THAIYEAR", true); //แสดงผลเป็น พ.ศ. ใน calendar   true , false
 
-
 //MySQL Connect
-define("DB_HOST","db");
+define("DB_HOST", $hostname);
 define("DB_NAME","thailympho_dbp");
-define("DB_USERNAME","thailympho_dbp");
-define("DB_PASSWORD","VB-D#ThaAi#LogCe&");
+define("DB_USERNAME",$user);
+define("DB_PASSWORD", $password);
 
 //MySQL table
 define("TB_ADD_DATA","web_add_data1");

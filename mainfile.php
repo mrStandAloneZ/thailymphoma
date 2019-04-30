@@ -16,12 +16,8 @@ $db = New DB();
     <?
 	$db->connectdb(DB_NAME,DB_USERNAME,DB_PASSWORD);
 	
-	
-
-
-	
-	
-	$res[theme] = $db->select_query("SELECT * FROM ".TB_THEME.""); 
+  $res[theme] = $db->select_query("SELECT * FROM ".TB_THEME.""); 
+  
 	while($arr[theme] = $db->fetch($res[theme])){
 	?>
 	<link rel="stylesheet" type="text/css" href="css/<?=$arr[theme][name_theme];?>" media="screen" />

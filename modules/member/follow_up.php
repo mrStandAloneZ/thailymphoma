@@ -1,7 +1,23 @@
 
 
 <?php
-$con=mysqli_connect("db",DB_USERNAME,DB_PASSWORD,DB_NAME);
+
+// local
+$hostname = "db";	
+$user = "thailympho_dbp";	
+$password = "VB-D#ThaAi#LogCe&";
+
+// dev
+// $hostname = "localhost";	
+// $user = "root";	
+// $password = "password";
+
+// production
+// $hostname = "localhost";	
+// $user = "thailympho_dbp";	
+// $password = "VB-D#ThaAi#LogCe&";
+
+$con=mysqli_connect($hostname ,DB_USERNAME,DB_PASSWORD,DB_NAME);
 // Check connection
 if (mysqli_connect_errno())
   {
