@@ -330,6 +330,7 @@ $txtex= "";
     if ($objResult["ext_other_text"]) {
         $count++;
     }
+    echo 'count = ' .$count . "</br>";
     $point_ext = 0;
     if ($count > 1) {
         $point_ext = 1;
@@ -510,7 +511,7 @@ $point_ann_arbor = '';
 
 <?php
 $text_ipi = "Low";
-    if ($point_age == 1) {
+    if ($point_age == 1) { //more than or equal 60
         $score = $point_age + $point_ldh + $point_per_ecog + $point_ann_arbor + $point_ext;
         if ($score == 2) {
             $text_ipi = 'Low Intermediate';
@@ -521,7 +522,7 @@ $text_ipi = "Low";
         if ($score > 3) {
             $text_ipi = 'High';
         }
-    } else {
+    } else { //less than 60
         $score = $point_age + $point_ldh + $point_per_ecog + $point_ann_arbor;
         if ($score == 1) {
             $text_ipi = 'Low Intermediate';
@@ -539,7 +540,21 @@ $text_ipi = "Low";
     <?php ////***************************************************************?>
 
 
-
+        <?php
+        if($point_age < 0){
+             echo  '< 60 <br/>';
+        }elseif($point_age >= 1){
+             echo '>= 60 <br/>';
+        }
+         echo ' $point_age = ' . $point_age . "<br/>";
+         echo ' $score = ' . $score . "<br/>";
+         echo ' $point_ldh = ' . $point_ldh . "<br/>";
+         echo ' $point_per_ecog = ' . $point_per_ecog . "<br/>";
+         echo ' $point_ann_arbor = ' . $point_ann_arbor . "<br/>";
+         echo ' $point_ext = ' . $point_ext . "<br/>";
+         echo $text_ipi . "</br>";
+         echo '========================================><br/>';
+         ?>
 
 
 
