@@ -155,7 +155,37 @@ $columns = array(
 );
 
 
+function array_splice_assoc(&$input, $offset, $length, $replacement) {
+        $replacement = (array) $replacement;
+        $key_indices = array_flip(array_keys($input));
+        if (isset($input[$offset]) && is_string($offset)) {
+                $offset = $key_indices[$offset];
+        }
+        if (isset($input[$length]) && is_string($length)) {
+                $length = $key_indices[$length] - $offset;
+        }
 
+        $input = array_slice($input, 0, $offset, TRUE)
+                + $replacement
+                + array_slice($input, $offset + $length, NULL, TRUE);
+}
+function array_move($which, $where, $array)
+{
+    $tmpWhich = $which;
+    $j=0;
+    $keys = array_keys($array);
+
+    for($i=0;$i<count($array);$i++)
+    {
+        if($keys[$i]==$tmpWhich)
+            $tmpWhich = $j;
+        else
+            $j++;
+    }
+    $tmp  = array_splice($array, $tmpWhich, 1);
+    array_splice_assoc($array, $where, 0, $tmp);
+    return $array;
+}
  
 function getNameFromNumber($num) {
     $numeric = $num % 26;
@@ -192,17 +222,6 @@ $data_for_export[$key]['A1'] = $dateofrecord;
 $centre = preg_replace('/(.+)/', '*$1', $value['centre']);
 $data_for_export[$key]['B1'] = $centre;
 
-// Status 1 (First Entry)
-
-$status_first_entry = '';
-if($value['dateofrecord'] != '' && $value['centre'] != '' && $value['patient_initials'] != '' && $value['sex'] != '' && $value['id_card_confirm'] != '' &&
-   $value['hn'] != '' && $value['province'] != '' && $value['payment'] != '' && $value['date_bio_report'] != '' && $value['pathology_confirm'] != '' 
-){
-   $status_first_entry = 'Complete';
-}else{
-    $status_first_entry = 'Incomplete';
-}
-$data_for_export[$key]['C1'] = $status_first_entry;
 
 $data_for_export[$key]['D1'] = 'check count  * remove';
 $data_for_export[$key]['E1'] = 'check status *remove';
@@ -455,7 +474,25 @@ $text_ipi = "Low";
 $data_for_export[$key]['BF1'] = $score . " Point";
 $data_for_export[$key]['BG1'] = $text_ipi . " Risk";
 
-// Follow
+
+// Status 1 (First Entry)
+
+$status_first_entry = '';
+if($value['dateofrecord'] != '' && $value['centre'] != '' && $value['codehos'] != ''  && $value['patient_initials'] != '' && $value['sex'] != '' && $value['id_card'] != '' && $value['id_card_confirm'] != '' &&
+   $value['hn'] != '' && $value['hn_confirm'] != '' && $value['date_of_birth'] != '' && $value['date_bio_report'] != '' && $description_age != '' && $value['province'] != '' && $value['payment'] != '' && $value['pathology'] != '' && $value['pathology_confirm'] != '' &&
+   $value['biopsy_site'] != '' && $value['type'] != '' && ($value['hodgkin_don'] != '' || ($value['type_non'] != '' && ($value['who_sub'] != '' || $value['work_sub'] != '' || $value['other_type'] != ''))) &&
+   $value['ann_arbor'] != '' && $value['symptom_ann'] != '' && $Extranodal_sites != '' &&  $count >= 0 &&  $value['per_ecog'] != '' && $value['ldh'] != '' && $value['micro'] != '' && $value['upper'] != '' &&
+   $value['hemoglobin'] != '' && $value['mcv'] != '' && $value['wbc'] != '' && $value['platelet'] != '' && $value['neutrophil'] != '' && $value['lymphocyte'] != '' && $value['monocyte'] != '' && $value['eosinophil'] != '' && $value['basophil'] != ''  && $value['blast_lymphoma'] != '' &&
+   $value['blast_lymphoma'] != '' && $value['hep_b_hbsag'] != '' && $value['hep_b_anti_hbcab'] != '' && $value['hep_b_anti_hbsab'] != '' && $value['hep_c_anti_hcv'] != '' && $value['status_bulky'] != ''  && $value['hiv_positive'] != '' && $score >= 0 && $text_ipi != ''
+){
+
+   $status_first_entry = 'Complete';
+}else{
+   $status_first_entry = 'Incomplete';
+}
+$data_for_export[$key]['C1'] = $status_first_entry;
+
+                                             // Follow
 $data_for_export[$key]['BH1'] = $value['dateofrecord'];
 $data_for_export[$key]['BI1'] = $value['dateofrecord'];
 $data_for_export[$key]['BJ1'] = $value['dateofrecord'];
@@ -496,12 +533,19 @@ $data_for_export[$key]['CR1'] = $value['dateofrecord'];
 $data_for_export[$key]['CS1'] = $value['dateofrecord'];
 $data_for_export[$key]['CT1'] = $value['dateofrecord'];
 
+
+
+$data_for_export[$key] = array_move('C1',2,$data_for_export[$key]);
+
 };
 
 
-// echo "<pre>";
-//   print_r($data_for_export);
-// echo "</pre>";
+
+
+
+echo "<pre>";
+  print_r($data_for_export);
+echo "</pre>";
 
  array_unshift($data_for_export, $firstColumn);
 
@@ -533,19 +577,19 @@ foreach ($firstColumn as $key => $value) {
 
 
 
-//save our workbook as this file name
-$filename = 'just_some_random_name.xls';
-//mime type
-header('Content-Type: application/vnd.ms-excel');
-//tell browser what's the file name
-header('Content-Disposition: attachment;filename="' . $filename . '"');
+// //save our workbook as this file name
+// $filename = 'just_some_random_name.xls';
+// //mime type
+// header('Content-Type: application/vnd.ms-excel');
+// //tell browser what's the file name
+// header('Content-Disposition: attachment;filename="' . $filename . '"');
 
-header('Cache-Control: max-age=0'); //no cache
-//save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
-//if you want to save it as .XLSX Excel 2007 format
+// header('Cache-Control: max-age=0'); //no cache
+// //save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
+// //if you want to save it as .XLSX Excel 2007 format
 
-$objWriter = PHPExcel_IOFactory::createWriter($doc, 'Excel5');
+// $objWriter = PHPExcel_IOFactory::createWriter($doc, 'Excel5');
 
-//force user to download the Excel file without writing it to server's HD
-$objWriter->save('php://output');
+// //force user to download the Excel file without writing it to server's HD
+// $objWriter->save('php://output');
 ?>
