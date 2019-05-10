@@ -76,29 +76,18 @@ if (!isset($_SESSION['login_true'])) {
            $('#date_bio_report').calendarsPicker({calendar: $.calendars.instance('thai','th')});
          });
        </script>
-
-      <script>
-          function chk_id () {
-              var jsonObj = {"id_card1" : $('#id_card1').val() }
-              $.ajax({
-              type: 'GET',
-              data: jsonObj,
-              url: '?name=member&file=check_id',
-                  success: function(data) {
-                      $('#show_data').html(data);
-                  }
-              });
-          } 
-
-        </script>
        <?php
-    $db->connectdb(DB_NAME, DB_USERNAME, DB_PASSWORD);
+$db->connectdb(DB_NAME, DB_USERNAME, DB_PASSWORD);
     $result = mysql_query("select * from " . TB_MEMBER . " where user='" . $_SESSION['login_true'] . "'") or die("Err Can not to result");
     $dbarr = mysql_fetch_array($result);
     $codehos = $dbarr['codehos'];
     ?>
 	
 	<style type="text/css">
+
+
+
+
 
 	select {
     width: 90%;
@@ -228,16 +217,15 @@ textarea{
   <tr bgcolor="#F4F4F4" >
     <th align="left">ID :</th>
     <td colspan="3" > <br />
-      <input type="password" size="10"  name="id_card" id="id_card1" maxlength="13"   onkeyup="onaction();checkid();chk_id();" >   &nbsp;&nbsp;&nbsp;
-      กรุณากรอกเป็นตัวเลข(Ex: 1522222222xx)   <font color="#FF0000">**ถ้าไม่รู้ให้ใส่เครื่องหมาย '-'</font> 
+      <input type="password" size="10"  name="id_card" id="id_card1" maxlength="13"   onkeyup="onaction();checkid();" >   &nbsp;&nbsp;&nbsp;
+      กรุณากรอกเป็นตัวเลข(Ex: 1522222222xx)   <font color="#FF0000">**ถ้าไม่รู้ให้ใส่เครื่องหมาย '-'</font>
       <br /><br />
-      <div id="show_data"></div>
     </td>
   </tr>
   <tr bgcolor="#F4F4F4" >
     <th align="left">Confirm ID:</th>
     <td colspan="3" > <br />
-     <input type="password" size="10"  name="id_card_confirm"  id="id_card_confirm1" maxlength="13"  onkeyup="onaction();checkid();chk_id();"> &nbsp;&nbsp;   กรุณากรอกเป็นตัวเลข(Ex: 1522222222xx)  <font color="#FF0000">**ถ้าไม่รู้ให้ใส่เครื่องหมาย '-'</font><br /><br />
+     <input type="password" size="10"  name="id_card_confirm"  id="id_card_confirm1" maxlength="13"  onkeyup="onaction();checkid();"> &nbsp;&nbsp;   กรุณากรอกเป็นตัวเลข(Ex: 1522222222xx)  <font color="#FF0000">**ถ้าไม่รู้ให้ใส่เครื่องหมาย '-'</font><br /><br />
 	 
      <span id="alertid" hidden><font color="#ff0000">กรุณากรอกข้อมูลให้ตรงกัน</font></span>
    </td>
@@ -813,13 +801,10 @@ var oth_biopsy =  document.getElementById("oth_biopsy");
 </tr>
 <tr bgcolor="#F4F4F4" >
   <th align="left">
-    <b>Bulky (mass > 7 cm) :</b>
+    <b>Bulky :</b>
   </th>
   <td><br />
-     <strong>Status :</strong> YES <input type="radio" name="status_bulky" value="yes"> NO <input type="radio" name="status_bulky" value="no">
-     <br />
-     <br />
-     <strong>Maximum diameter : </strong><input type="text"   name="bulky"   value=""   >    (cm)
+    <input type="text"   name="bulky"   value=""   >    (cm) <strong>Status :</strong> YES <input type="radio" name="status_bulky" value="yes"> NO <input type="radio" name="status_bulky" value="no">
     <br />
       
     <br />
@@ -1431,11 +1416,7 @@ alert("กรุณากรอก ID ให้ตรงกัน") ;
 document.checkForm.id_card_confirm.focus() ;
 return false ;
 }
-else if(document.getElementById("show_data1").style.display==''){
-  alert("ID นี้มีผู้ใช้งานแล้ว") ;
-  $('#id_card1').focus();
-  return false ;
-}
+
 else if(document.checkForm.hn.value=="") {
 alert("กรุณากรอก HN  ") ;
 document.checkForm.hn.focus() ;

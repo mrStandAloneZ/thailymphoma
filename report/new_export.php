@@ -58,8 +58,8 @@ $columns = array(
 "Date of record",
 "Code",
 "Status 1 (First entry)",
-"Check Count",
-"Check Status",
+// "Check Count",
+// "Check Status",
 "Patient Initials",
 "Gender",
 "Personal ID",
@@ -223,8 +223,8 @@ $centre = preg_replace('/(.+)/', '*$1', $value['centre']);
 $data_for_export[$key]['B1'] = $centre;
 
 
-$data_for_export[$key]['D1'] = 'check count  * remove';
-$data_for_export[$key]['E1'] = 'check status *remove';
+// $data_for_export[$key]['D1'] = 'check count  * remove';
+// $data_for_export[$key]['E1'] = 'check status *remove';
 
 
 $data_for_export[$key]['F1'] = $value['patient_initials'];
@@ -493,45 +493,348 @@ if($value['dateofrecord'] != '' && $value['centre'] != '' && $value['codehos'] !
 $data_for_export[$key]['C1'] = $status_first_entry;
 
                                              // Follow
-$data_for_export[$key]['BH1'] = $value['dateofrecord'];
-$data_for_export[$key]['BI1'] = $value['dateofrecord'];
-$data_for_export[$key]['BJ1'] = $value['dateofrecord'];
-$data_for_export[$key]['BK1'] = $value['dateofrecord'];
-$data_for_export[$key]['BL1'] = $value['dateofrecord'];
-$data_for_export[$key]['BM1'] = $value['dateofrecord'];
-$data_for_export[$key]['BN1'] = $value['dateofrecord'];
-$data_for_export[$key]['BO1'] = $value['dateofrecord'];
-$data_for_export[$key]['BP1'] = $value['dateofrecord'];
-$data_for_export[$key]['BQ1'] = $value['dateofrecord'];
-$data_for_export[$key]['BR1'] = $value['dateofrecord'];
-$data_for_export[$key]['BS1'] = $value['dateofrecord'];
-$data_for_export[$key]['BT1'] = $value['dateofrecord'];
-$data_for_export[$key]['BU1'] = $value['dateofrecord'];
-$data_for_export[$key]['BV1'] = $value['dateofrecord'];
-$data_for_export[$key]['BW1'] = $value['dateofrecord'];
-$data_for_export[$key]['BX1'] = $value['dateofrecord'];
-$data_for_export[$key]['BY1'] = $value['dateofrecord'];
-$data_for_export[$key]['BZ1'] = $value['dateofrecord'];
-$data_for_export[$key]['CA1'] = $value['dateofrecord'];
-$data_for_export[$key]['CB1'] = $value['dateofrecord'];
-$data_for_export[$key]['CC1'] = $value['dateofrecord'];
-$data_for_export[$key]['CD1'] = $value['dateofrecord'];
-$data_for_export[$key]['CE1'] = $value['dateofrecord'];
-$data_for_export[$key]['CF1'] = $value['dateofrecord'];
-$data_for_export[$key]['CG1'] = $value['dateofrecord'];
-$data_for_export[$key]['CH1'] = $value['dateofrecord'];
-$data_for_export[$key]['CI1'] = $value['dateofrecord'];
-$data_for_export[$key]['CJ1'] = $value['dateofrecord'];
-$data_for_export[$key]['CK1'] = $value['dateofrecord'];
-$data_for_export[$key]['CL1'] = $value['dateofrecord'];
-$data_for_export[$key]['CM1'] = $value['dateofrecord'];
-$data_for_export[$key]['CN1'] = $value['dateofrecord'];
-$data_for_export[$key]['CO1'] = $value['dateofrecord'];
-$data_for_export[$key]['CP1'] = $value['dateofrecord'];
-$data_for_export[$key]['CQ1'] = $value['dateofrecord'];
-$data_for_export[$key]['CR1'] = $value['dateofrecord'];
-$data_for_export[$key]['CS1'] = $value['dateofrecord'];
-$data_for_export[$key]['CT1'] = $value['dateofrecord'];
+$data_for_export[$key]['BH1'] = $value['date_record_follow'];
+
+// chemotherapy
+if($value['chemotherapy_follow'] == 'Chemotherapy'){
+    $chemotherapy_follow = 'Yes';
+}elseif($value['chemotherapy_follow'] == 'No Chemotherapy'){
+     $chemotherapy_follow = 'No';
+}
+$data_for_export[$key]['BI1'] = $chemotherapy_follow;
+
+$data_for_export[$key]['BJ1'] = $value['date_chemo_follow'];
+
+if($value['chemo_select_follow' != 'other']){
+   $chemo_select_follow = $value['chemo_select_follow'];
+}else{
+   $chemo_select_follow = $value['chemo_select_follow_other'];
+};
+$data_for_export[$key]['BK1'] = $chemo_select_follow;
+
+$data_for_export[$key]['BL1'] = $value['received_follow'];
+
+// Immunotherapy
+if($value['immunotherapy_follow'] == 'Immunotherapy'){
+    $immunotherapy_follow = 'Yes';
+}elseif($value['immunotherapy_follow'] == 'Immunotherapy_no'){
+     $immunotherapy_follow = 'No';
+}
+$data_for_export[$key]['BM1'] = $immunotherapy_follow;
+
+$data_for_export[$key]['BN1'] = $value['date_immun_follow'];
+
+if(preg_match('/Rituximab|Other/', $value['immun_select_follow'] )){
+   $immun_select_follow = $value['immun_other_text'];
+}else{
+   $immun_select_follow = $value['immun_select_follow'];
+}
+$data_for_export[$key]['BO1'] = $immun_select_follow;
+
+// Radiotherapy
+if($value['radiotherapy_follow'] == 'Radiotherapy'){
+    $radiotherapy_follow = 'Yes';
+}elseif($value['radiotherapy_follow'] == 'Radiotherapy_no'){
+     $radiotherapy_follow = 'No';
+}
+$data_for_export[$key]['BP1'] = $radiotherapy_follow;
+
+$data_for_export[$key]['BQ1'] = $value['date_rad_follow'];
+
+
+// Surgery
+$data_for_export[$key]['BR1'] = $value['surgery_follow'];
+$data_for_export[$key]['BS1'] = $value['date_surgery_follow'];
+
+
+// Clinical Outcome
+$data_for_export[$key]['BT1'] = $value['result_follow'];
+
+if(preg_match('/Complete response/', $value['result_follow'])){
+  $additional = $value['date_complete_follow'];
+}elseif(preg_match('/Indeterminate /', $value['result_follow'])){
+  $additional = $value['result_cause_follow'];
+}else{
+  $additional = '';
+}
+$data_for_export[$key]['BU1'] = $additional;
+
+// Progression/relapse
+$data_for_export[$key]['BV1'] = $value['progression_follow'];
+
+$data_for_export[$key]['BW1'] = $value['date_progression_follow'];
+
+$data_for_export[$key]['BX1'] = $value['history_follow'];
+
+$data_for_export[$key]['BY1'] = $value['lymph node'];
+
+
+if($value['extranodal_follow'] == 'Extranodal sites') {
+
+if ($value['extr_1_follow']){
+   $extranodal_follow .= $value['extr_1_follow'] . " , ";
+}
+if ($value['extr_2_follow']){
+   $extranodal_follow .= $value['extr_2_follow'] . " , ";
+}
+if ($value['extr_3_follow']){
+   $extranodal_follow .= $value['extr_3_follow'] . " , ";
+}
+if ($value['extr_4_follow']){
+   $extranodal_follow .= $value['extr_4_follow'] . " , ";
+}
+if ($value['extr_5_follow']){
+   $extranodal_follow .= $value['extr_5_follow'] . " , ";
+}
+if ($value['extr_6_follow']){
+   $extranodal_follow .= $value['extr_6_follow'] . " , ";
+}
+if ($value['extr_7_follow']){
+   $extranodal_follow .= $value['extr_7_follow'] . " , ";
+}
+if ($value['extr_8_follow']){
+   $extranodal_follow .= $value['extr_8_follow'] . " , ";
+}
+if ($value['extr_9_follow']){
+   $extranodal_follow .= $value['extr_9_follow'] . " , ";
+}
+if ($value['extr_10_follow']){
+   $extranodal_follow .= $value['extr_10_follow'] . " , ";
+}
+if ($value['extr_11_follow']){
+   $extranodal_follow .= $value['extr_11_follow'] . " , ";
+}
+if ($value['extr_12_follow']){
+   $extranodal_follow .= $value['extr_12_follow'] . " , ";
+}
+if ($value['extr_13_follow']){
+   $extranodal_follow .= $value['extr_13_follow'] . " , ";
+}
+if ($value['extr_14_follow']){
+   $extranodal_follow .= $value['extr_14_follow'] . " , ";
+}
+if ($value['extr_15_follow']){
+   $extranodal_follow .= $value['extr_15_follow'] . " , ";
+}
+if ($value['extr_16_follow']){
+   $extranodal_follow .= $value['extr_16_follow'] . " , ";
+}
+if ($value['extr_17_follow']){
+   $extranodal_follow .= $value['extr_17_follow'] . " , ";
+}
+if ($value['extr_other_text']){
+   $extranodal_follow .= $value['extr_other_text'] . " , ";
+}
+
+$extranodal_follow = preg_replace('/,\s+$/', '', $extranodal_follow);
+
+}
+$data_for_export[$key]['BZ1'] = $extranodal_follow;
+
+
+// Salvage treatment Salvage regimen (mark all that apply)
+
+$data_for_export[$key]['CA1'] = $value['salvage_follow'];
+
+if($value['salvage_follow'] == 'Yes'){
+ // chemo
+$salvage_follow = '';
+   if ($value['chemo_follow_1']){
+   $salvage_follow .= $value['chemo_follow_1'] . " , ";
+   }
+   if ($value['chemo_follow_2']){
+   $salvage_follow .= $value['chemo_follow_2'] . " , ";
+   }
+   if ($value['chemo_follow_3']){
+   $salvage_follow .= $value['chemo_follow_3'] . " , ";
+   }
+   if ($value['chemo_follow_4']){
+   $salvage_follow .= $value['chemo_follow_4'] . " , ";
+   }
+   if ($value['chemo_follow_5']){
+   $salvage_follow .= $value['chemo_follow_5'] . " , ";
+   }
+   if ($value['chemo_follow_6']){
+   $salvage_follow .= $value['chemo_follow_6'] . " , ";
+   }
+   if ($value['chemo_follow_7']){
+   $salvage_follow .= $value['chemo_follow_7'] . " , ";
+   }
+   if ($value['chemo_follow_8']){
+   $salvage_follow .= $value['chemo_follow_8'] . " , ";
+   }
+   if ($value['chemo_follow_9']){
+   $salvage_follow .= $value['chemo_follow_9'] . " , ";
+   }
+   if ($value['chemo_follow_10']){
+   $salvage_follow .= $value['chemo_follow_10'] . " , ";
+   }
+   if ($value['chemo_follow_11']){
+   $salvage_follow .= $value['chemo_follow_11'] . " , ";
+   }
+   if ($value['chemo_follow_12']){
+   $salvage_follow .= $value['chemo_follow_12'] . " , ";
+   }
+   if ($value['chemo_follow_13']){
+   $salvage_follow .= $value['chemo_follow_13'] . " , ";
+   }
+   if ($value['chemo_follow_14']){
+   $salvage_follow .= $value['chemo_follow_14'] . " , ";
+   }
+   if ($value['chemo_follow_15']){
+   $salvage_follow .= $value['chemo_follow_15'] . " , ";
+   }
+   if ($value['chemo_follow_16']){
+   $salvage_follow .= $value['chemo_follow_16'] . " , ";
+   }
+   if ($value['chemo_follow_17']){
+   $salvage_follow .= $value['chemo_follow_17'] . " , ";
+   }
+   if ($value['chemo_follow_18']){
+   $salvage_follow .= $value['chemo_follow_18'] . " , ";
+   }
+   if ($value['chemo_follow_19']){
+   $salvage_follow .= $value['chemo_follow_19'] . " , ";
+   }
+   if ($value['chemo_follow_20']){
+   $salvage_follow .= $value['chemo_follow_20'] . " , ";
+   }
+   if ($value['chemo_follow_21']){
+   $salvage_follow .= $value['chemo_follow_21'] . " , ";
+   }
+   if ($value['chemo_follow_22']){
+   $salvage_follow .= $value['chemo_follow_22'] . " , ";
+   }
+   if ($value['chemo_follow_23']){
+   $salvage_follow .= $value['chemo_follow_23'] . " , ";
+   }
+   if ($value['chemo_follow_24']){
+   $salvage_follow .= $value['chemo_follow_24'] . " , ";
+   }
+   if ($value['chemo_follow_25']){
+   $salvage_follow .= $value['chemo_follow_25'] . " , ";
+   }
+   if ($value['chemo_follow_26']){
+   $salvage_follow .= $value['chemo_follow_26'] . " , ";
+   }
+   if ($value['chemo_follow_27']){
+   $salvage_follow .= $value['chemo_follow_27'] . " , ";
+   }
+   if ($value['chemo_follow_28']){
+   $salvage_follow .= $value['chemo_follow_28'] . " , ";
+   }
+   if ($value['chemo_follow_28_1']){
+   $salvage_follow .= $value['chemo_follow_28_1'] . " , ";
+   }
+   if ($value['chemo_follow_28_2']){
+   $salvage_follow .= $value['chemo_follow_28_2'] . " , ";
+   }
+   if ($value['chemo_follow_29']){
+     $salvage_follow .= $value['chemo_other_follow_29'] . " , ";
+   }
+
+
+   $salvage_follow = preg_replace('/\s{3}/', '', $salvage_follow);
+   $salvage_follow = preg_replace('/,\s+$/', '', $salvage_follow);
+
+if($salvage_follow != ''){
+   $data_for_export[$key]['CB1'] = 'Yes';
+   $data_for_export[$key]['CC1'] = $salvage_follow;
+}else{
+    $data_for_export[$key]['CB1'] = 'No';
+    $data_for_export[$key]['CC1'] = '';
+}
+// immuno
+$salvage_immunotherapy = '';
+if($value['sal_immun_1']){
+    $salvage_immunotherapy .= $value['sal_immun_1'] . " , ";
+}
+if($value['sal_immun_2']){
+    $salvage_immunotherapy .= $value['sal_immun_2'] . " , ";
+}
+if($value['sal_immun_3']){
+    $salvage_immunotherapy .= $value['sal_immun_3'] . " , ";
+}
+if($value['sal_immun_3_1']){
+    $salvage_immunotherapy .= $value['sal_immun_3_1'] . " , ";
+}
+if($value['sal_immun_3_2']){
+    $salvage_immunotherapy .= $value['sal_immun_3_2'] . " , ";
+}
+if($value['sal_immun_4']){
+    $salvage_immunotherapy .= $value['sal_immun_4_text'] . " , ";
+}
+$salvage_immunotherapy = preg_replace('/,\s+$/', '', $salvage_immunotherapy);
+if($salvage_immunotherapy != ''){
+   $data_for_export[$key]['CD1'] = 'Yes';
+   $data_for_export[$key]['CE1'] = $salvage_immunotherapy;
+}else{
+   $data_for_export[$key]['CD1'] = 'No';
+   $data_for_export[$key]['CE1'] = '';
+}
+
+//Radio
+    
+    if($value['sal_radio_follow'] == 'Radiotherapy'){
+         $data_for_export[$key]['CF1'] = 'Yes';
+    }else{
+         $data_for_export[$key]['CF1'] = 'No';
+    }
+//Surgery
+    
+    if($value['sal_surgery_follow'] == 'Surgery'){
+         $data_for_export[$key]['CG1'] = 'Yes';
+    }else{
+         $data_for_export[$key]['CG1'] = 'No';
+    }
+
+}else{ // no
+    $data_for_export[$key]['CB1'] = 'No';
+    $data_for_export[$key]['CC1'] = '';
+    $data_for_export[$key]['CD1'] = 'No';
+    $data_for_export[$key]['CE1'] = '';
+    $data_for_export[$key]['CF1'] = 'No';
+    $data_for_export[$key]['CG1'] = 'No';
+}
+
+// Stem cell transplant
+
+$data_for_export[$key]['CH1'] = $value['stem_cell_follow'];
+
+if($value['stem_cell_follow'] == 'Yes'){
+     $data_for_export[$key]['CI1'] = $value['date_stem_cell_follow'];
+     $data_for_export[$key]['CJ1'] = $value['stem_cell_method'];
+     if($value['stem_cell_method'] == 'Allogeneic'){
+         $data_for_export[$key]['CK1'] = $value['conditioning'];
+         if($value['donor_follow'] == 'Other'){
+             $data_for_export[$key]['CL1'] = $value['donor_follow_other'];
+         }else{
+             $data_for_export[$key]['CL1'] = $value['donor_follow'];
+         }
+     }
+}else{
+       $data_for_export[$key]['CI1'] = '';
+       $data_for_export[$key]['CJ1'] = '';
+       $data_for_export[$key]['CK1'] = '';
+       $data_for_export[$key]['CL1'] = '';
+}
+
+// Date of last Contact
+$data_for_export[$key]['CM1'] = $value['status_follow'];
+$data_for_export[$key]['CN1'] = $value['date_last_contact_follow'];
+
+if($value['status_follow'] == 'Alive'){
+   $data_for_export[$key]['CO1'] = $value['alive_status'];
+}elseif($value['status_follow'] == 'Dead') {
+   $data_for_export[$key]['CP1'] = $value['date_dead_follow'];
+   if($value['cause_of_dead'] == 'Other'){
+      $data_for_export[$key]['CQ1'] = $value['cause_of_dead_other'];
+   }else{
+      $data_for_export[$key]['CQ1'] = $value['cause_of_dead'];
+   }
+   $data_for_export[$key]['CR1'] = $value['lymphoma_status'];
+}
+
 
 
 
@@ -543,9 +846,9 @@ $data_for_export[$key] = array_move('C1',2,$data_for_export[$key]);
 
 
 
-echo "<pre>";
-  print_r($data_for_export);
-echo "</pre>";
+// echo "<pre>";
+//   print_r($data_for_export);
+// echo "</pre>";
 
  array_unshift($data_for_export, $firstColumn);
 
@@ -577,19 +880,19 @@ foreach ($firstColumn as $key => $value) {
 
 
 
-// //save our workbook as this file name
-// $filename = 'just_some_random_name.xls';
-// //mime type
-// header('Content-Type: application/vnd.ms-excel');
-// //tell browser what's the file name
-// header('Content-Disposition: attachment;filename="' . $filename . '"');
+//save our workbook as this file name
+$filename = 'just_some_random_name.xls';
+//mime type
+header('Content-Type: application/vnd.ms-excel');
+//tell browser what's the file name
+header('Content-Disposition: attachment;filename="' . $filename . '"');
 
-// header('Cache-Control: max-age=0'); //no cache
-// //save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
-// //if you want to save it as .XLSX Excel 2007 format
+header('Cache-Control: max-age=0'); //no cache
+//save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
+//if you want to save it as .XLSX Excel 2007 format
 
-// $objWriter = PHPExcel_IOFactory::createWriter($doc, 'Excel5');
+$objWriter = PHPExcel_IOFactory::createWriter($doc, 'Excel5');
 
-// //force user to download the Excel file without writing it to server's HD
-// $objWriter->save('php://output');
+//force user to download the Excel file without writing it to server's HD
+$objWriter->save('php://output');
 ?>
