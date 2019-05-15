@@ -2,7 +2,6 @@
 if (!isset($_SESSION['login_true'])) {
 //  url=index.php คำสั่งนี้จะให้ไปหน้าที่จะต้องกรอก user,pwd ถ้าอยู่โฟล์เดอร์อื่นให้เรียกให้ถูกนะครับ
     ?>
-	
     <div id='wrapper'>
      <div id='logo'>
          <h1><a href='index.php'><img src='images/logo.jpg' width='940' height='140' /></a></h1>

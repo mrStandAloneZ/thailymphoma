@@ -6,6 +6,7 @@ echo " bgcolor=FFFFFF";
 }
 ### จบการเช็ค ###
 ?>
+
 <? include "modules/index/header.php" ; ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -15,15 +16,15 @@ echo " bgcolor=FFFFFF";
 </head>
 <body>
 <h1>บันทึกข้อมูลเสร็จแล้ว</h1>
-
-                <?php
+<?php
+$login_true = $_SESSION['login_true'];
 $db->connectdb(DB_NAME,DB_USERNAME,DB_PASSWORD);
 
 $result = mysql_query("select * from ".TB_MEMBER." where user='$login_true'") or die ("Err Can not to result") ;
 $dbarr = mysql_fetch_array($result) ;
+
 $member_id= $dbarr["member_id"];
 $codehos= $dbarr["codehos"];
-
 
 
      $ss = "select *  from " . TB_ADD_DATA ." where codehos='$codehos' and  id = (select max(id) as idmax  from web_add_data1 where codehos='$codehos')";
@@ -38,23 +39,11 @@ $codehos= $dbarr["codehos"];
        $idcen= $codehos.$substr;
 
 ?>
-  <?
-               $dmy = "$date_of_birth"; //dmy-ymd    แปลงปีวันเกิด
-				list($day, $month, $year) = explode("-", $dmy);
-				//	$year = $year-543;
-				$ymd_birth = "$year-$month-$day";
-				list($byear, $bmonth, $bday)= explode("-",$ymd_birth);       //จุดต้องเปลี่ยน
-				//echo $ymd_birth;
-			    //  	$birthday = "1982-06-10";      //รูปแบบการเก็บค่าข้อมูลวันเกิด
-				//		$today = date("Y-m-d");   //จุดต้องเปลี่ยน
-			   ?>
+  
 
 	<? date_default_timezone_set("Asia/Bangkok"); ?><br />
 	<? 
-	//echo $centre;
-	//echo $patient_initials;
-	//echo $ymd_birth;
-	///////////////////
+	
 						$date_today = date("d/m/");
 						$date_today1 = date("Y")+'543';
 						$date_date = date("d/m/$date_today1");
@@ -92,13 +81,18 @@ $codehos= $dbarr["codehos"];
     return $result;
 }
 
-
+$dateofrecord = checkPost("dateofrecord");
+$patient_initials = checkPost('patient_initials');
 $sex = checkPost("sex");
 $id_card = checkPost("id_card");
 $id_card_confirm = checkPost("id_card_confirm");
 $hn = checkPost("hn");
 $hn_confirm = checkPost("hn_confirm");
+
 $date_of_birth = checkPost("date_of_birth");
+$ymd_birth = preg_replace('/(\d{2})-(\d{2})-(\d{4})/', '$3-$2-$1', $date_of_birth);
+
+
 $province = checkPost("province");
 $payment = checkPost("payment");
 $payment_other = checkPost("payment_other");
@@ -110,14 +104,15 @@ $oth_biopsy = checkPost("oth_biopsy");
 $type = checkPost("type");
 $hodgkin_don = checkPost("hodgkin_don");
 $type_non = checkPost("type_non");
-
 $type_sub_non = checkPost("type_sub_non");
-$who_sub = checkPost("who_sub");
+$who_sub_pathology = checkPost("who_sub_pathology");
 $work_sub = checkPost("work_sub");
 $other_type = checkPost("other_type");
 
 $ann_arbor = checkPost("ann_arbor");
 $symptom_ann = checkPost("symptom_ann");
+
+
 $ext_none = checkPost("ext_none");
 $ext_wal = checkPost("ext_wal");
 $ext_sin = checkPost("ext_sin");
@@ -137,6 +132,68 @@ $ext_spleen = checkPost("ext_spleen");
 $ext_skin = checkPost("ext_skin");
 $ext_other = checkPost("ext_other");
 $ext_other_text = checkPost("ext_other_text");
+
+if($ext_none != ''){
+   $num_ext = 0;
+   echo $num_txt;
+}else{
+   $count_extra = 0;
+
+   if($ext_wal != ''){
+       $count_extra++;
+   }
+   if($ext_sin != ''){
+       $count_extra++;
+   }
+   if($ext_sal != ''){
+       $count_extra++;
+   }
+   if($ext_thy != ''){
+       $count_extra++;
+   }
+   if($ext_eye != ''){
+       $count_extra++;
+   }
+   if($ext_lung != ''){
+       $count_extra++;
+   }
+   if($ext_breast != ''){
+       $count_extra++;
+   }
+   if($ext_stomach != ''){
+       $count_extra++;
+   }
+   if($ext_small != ''){
+       $count_extra++;
+   }
+   if($ext_testis != ''){
+       $count_extra++;
+   }
+   if($ext_brain != ''){
+       $count_extra++;
+   }
+   if($ext_liver != ''){
+       $count_extra++;
+   }
+   if($ext_large != ''){
+       $count_extra++;
+   }
+   if($ext_bone != ''){
+       $count_extra++;
+   }
+   if($ext_spleen != ''){
+       $count_extra++;
+   }
+   if($ext_skin != ''){
+       $count_extra++;
+   }
+   if($ext_other != ''){
+       $count_extra++;
+   }
+   $num_ext = $count_extra;
+
+}
+
 $per_ecog = checkPost("per_ecog");
 $ldh = checkPost("ldh");
 
@@ -164,7 +221,6 @@ $status_bulky = checkPost("status_bulky");
 $hiv_positive = checkPost("hiv_positive");
 $member_add = checkPost("member_add");
 $date_add = checkPost("date_add");
-  
   
 $number_ext = 0;
 $txt_st = "";
@@ -237,7 +293,7 @@ $txt_st = $txt_st."1,";
     $number_ext++;
 }else{$txt_st = $txt_st."0,";}
   
-												
+						
 												$conn = mysqli_connect($hostname, $user, $password, $dbname);
 												if (!$conn) {
                                                   die("Connection failed: " . mysqli_connect_error());
@@ -296,6 +352,7 @@ $txt_st = $txt_st."1,";
 													ext_skin,
 													ext_other,
 													ext_other_text,
+													num_ext,
 													per_ecog,
 													ldh,
 													micro ,
@@ -371,7 +428,8 @@ $txt_st = $txt_st."1,";
  										'$ext_spleen',
  										'$ext_skin',
  										'$ext_other',
- 										'$ext_other_text',
+										 '$ext_other_text',
+										 '$num_ext',
  										'$per_ecog',
  										'$ldh',
 										'$micro' ,
@@ -397,18 +455,18 @@ $txt_st = $txt_st."1,";
  										'$hiv_positive',
  										'$member_id',
  										'$date_date','$txt_st')" ;
-											
 									if (mysqli_query($conn, $sql)) {
     echo "New record created successfully";
 } else {
     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 }
+// echo $sql . '<br/>';
 
 mysqli_close($conn);
 							?>				
          <?
        	echo "<center><font size=\"3\" face='MS Sans Serif'><b>ข้อมูลของคุณ ได้ถูกบันทึกแล้วครับ</b></font><BR><BR><BR><BR><BR><BR><BR><BR></center>" ;
-	// echo "<meta http-equiv='refresh' content='1; url=index.php'>" ;
+	    echo "<meta http-equiv='refresh' content='1; url=index.php'>" ;
 
 		?>
 								   
