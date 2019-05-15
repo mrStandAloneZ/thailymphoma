@@ -83,7 +83,87 @@ $codehos= $dbarr["codehos"];
   <?  	
   require_once("includes/add_data.php");
   
-  
+  function checkPost($name_post)
+{
+    $result = null;
+    if (isset($_POST[$name_post])) {
+        $result = $_POST[$name_post];
+    }
+    return $result;
+}
+
+
+$sex = checkPost("sex");
+$id_card = checkPost("id_card");
+$id_card_confirm = checkPost("id_card_confirm");
+$hn = checkPost("hn");
+$hn_confirm = checkPost("hn_confirm");
+$date_of_birth = checkPost("date_of_birth");
+$province = checkPost("province");
+$payment = checkPost("payment");
+$payment_other = checkPost("payment_other");
+$date_bio_report = checkPost("date_bio_report");
+$pathology = checkPost("pathology");
+$pathology_confirm = checkPost("pathology_confirm");
+$biopsy_site = checkPost("biopsy_site");
+$oth_biopsy = checkPost("oth_biopsy");
+$type = checkPost("type");
+$hodgkin_don = checkPost("hodgkin_don");
+$type_non = checkPost("type_non");
+
+$type_sub_non = checkPost("type_sub_non");
+$who_sub = checkPost("who_sub");
+$work_sub = checkPost("work_sub");
+$other_type = checkPost("other_type");
+
+$ann_arbor = checkPost("ann_arbor");
+$symptom_ann = checkPost("symptom_ann");
+$ext_none = checkPost("ext_none");
+$ext_wal = checkPost("ext_wal");
+$ext_sin = checkPost("ext_sin");
+$ext_sal = checkPost("ext_sal");
+$ext_thy = checkPost("ext_thy");
+$ext_eye = checkPost("ext_eye");
+$ext_lung = checkPost("ext_lung");
+$ext_breast = checkPost("ext_breast");
+$ext_stomach = checkPost("ext_stomach");
+$ext_small = checkPost("ext_small");
+$ext_testis = checkPost("ext_testis");
+$ext_brain = checkPost("ext_brain");
+$ext_liver = checkPost("ext_liver");
+$ext_large = checkPost("ext_large");
+$ext_bone = checkPost("ext_bone");
+$ext_spleen = checkPost("ext_spleen");
+$ext_skin = checkPost("ext_skin");
+$ext_other = checkPost("ext_other");
+$ext_other_text = checkPost("ext_other_text");
+$per_ecog = checkPost("per_ecog");
+$ldh = checkPost("ldh");
+
+$micro = checkPost("micro");
+$upper = checkPost("upper");
+$hemoglobin = checkPost("hemoglobin");
+$mcv = checkPost("mcv");
+$wbc = checkPost("wbc");
+$platelet = checkPost("platelet");
+$neutrophil = checkPost("neutrophil");
+$lymphocyte = checkPost("lymphocyte");
+$monocyte = checkPost("monocyte");
+$eosinophil = checkPost("eosinophil");
+$basophil = checkPost("basophil");
+$luc = checkPost("luc");
+$blast_lymphoma = checkPost("blast_lymphoma");
+$hepatitis_test = checkPost("hepatitis_test");
+$hep_b_hbsag = checkPost("hep_b_hbsag");
+$hep_b_anti_hbsab = checkPost("hep_b_anti_hbsab");
+$hep_b_anti_hbcab = checkPost("hep_b_anti_hbcab");
+$hep_c_anti_hcv = checkPost("hep_c_anti_hcv");
+$bulky = checkPost("bulky");
+$status_bulky = checkPost("status_bulky");
+
+$hiv_positive = checkPost("hiv_positive");
+$member_add = checkPost("member_add");
+$date_add = checkPost("date_add");
   
   
 $number_ext = 0;
@@ -156,9 +236,14 @@ if ($ext_other != "") {
 $txt_st = $txt_st."1,";
     $number_ext++;
 }else{$txt_st = $txt_st."0,";}
-												mysql_connect($hostname, $user, $password) or die("ติดต่อฐานข้อมูลไม่ได้");
-												// เลือกฐานข้อมูล
-												mysql_select_db($dbname) or die("เลือกฐานข้อมูลไม่ได้");
+  
+												
+												$conn = mysqli_connect($hostname, $user, $password, $dbname);
+												if (!$conn) {
+                                                  die("Connection failed: " . mysqli_connect_error());
+                                                  }
+												
+												
 												// คำสั่ง SQL และสั่งให้ทำงาน
 													$sql = "insert into  web_add_data1 (centre,
 													codehos,
@@ -182,6 +267,7 @@ $txt_st = $txt_st."1,";
 													pathology,
 													pathology_confirm,
 													biopsy_site,
+													oth_biopsy,
 													type,
 													hodgkin_don,
 													type_non,
@@ -231,6 +317,7 @@ $txt_st = $txt_st."1,";
 													hep_b_anti_hbsab  ,
 													hep_c_anti_hcv  ,
 													bulky  ,
+													status_bulky  ,
 													hiv_positive,
 													member_add,
 													date_add,txt_st)
@@ -256,6 +343,7 @@ $txt_st = $txt_st."1,";
  										'$pathology',
  										'$pathology_confirm',
  										'$biopsy_site',
+ 										'$oth_biopsy',
  										'$type',
   										'$hodgkin_don ',
   										'$type_non ',
@@ -304,20 +392,23 @@ $txt_st = $txt_st."1,";
 										'$hep_b_anti_hbcab' ,
 										'$hep_b_anti_hbsab' ,
 										'$hep_c_anti_hcv' ,
-										'$bulky' ,			
+										'$bulky' ,
+										'$status_bulky' ,			
  										'$hiv_positive',
  										'$member_id',
  										'$date_date','$txt_st')" ;
 											
-												mysql_query("SET NAMES tis620");
-												
-									//		echo  $sql;
-										$dbquery = mysql_db_query($dbname, $sql);
-											mysql_close();			
+									if (mysqli_query($conn, $sql)) {
+    echo "New record created successfully";
+} else {
+    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+}
+
+mysqli_close($conn);
 							?>				
          <?
        	echo "<center><font size=\"3\" face='MS Sans Serif'><b>ข้อมูลของคุณ ได้ถูกบันทึกแล้วครับ</b></font><BR><BR><BR><BR><BR><BR><BR><BR></center>" ;
-	echo "<meta http-equiv='refresh' content='1; url=index.php'>" ;
+	// echo "<meta http-equiv='refresh' content='1; url=index.php'>" ;
 
 		?>
 								   

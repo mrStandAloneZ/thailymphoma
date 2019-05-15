@@ -35,9 +35,11 @@ $maxdate = $_POST['maxyear'] . "-" . $_POST['maxmonth'] . "-30";
 
 $sql = "SELECT * FROM web_add_data1  WHERE (dateofrecord BETWEEN '" . $mindate . "' AND '" . $maxdate . "')";
 
-if ($code_hospital != "ALL") {
+
+if ($code_hospital != "") {
     $sql .= " AND codehos ='" . $code_hospital . "'";
 }
+
 
 $result = $conn->query($sql);
 

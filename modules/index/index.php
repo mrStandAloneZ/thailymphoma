@@ -314,15 +314,153 @@ $bgtxt = 1;
                 $per_ecog = $result['per_ecog'];
                 $ldh = $result['ldh'];
                 $hiv_positive = $result['hiv_positive'];
-			 	 $received_follow = $result["received_follow"];
+                  $received_follow = $result["received_follow"];
+                  
+
+                    // Calculate Age
+
+            // date("Y");
+            $year_month_date = preg_split('/-/', $result['date_of_birth']);
+            $age = (date("Y") + 543) - $year_month_date[0];
+
+            $date_bio_report_year_month_date = preg_split('/-/', $result['date_bio_report']);
+
+            $description_age = $date_bio_report_year_month_date[2] - $year_month_date[0];
+
+            if($age < 60){
+                $ipi_age = 0;
+            }else{
+                $ipi_age = 1;
+            }
+
+
+
+            // Extranodal sites : (mark all that apply):
+$Extranodal_sites = '';
+$count = null;
+if($result['ext_none'] == 'ext_done'){
+   $Extranodal_sites = 'None,';
+   $count = 0;
+}
+if ($result['ext_wal']){
+   $Extranodal_sites .= $result['ext_wal'] . " , ";
+   $count++;
+}
+if ($result['ext_sin']){
+   $Extranodal_sites .= $result['ext_sin'] . " , ";
+   $count++;
+}
+if ($result['ext_sal']){
+   $Extranodal_sites .= $result['ext_sal'] . " , ";
+   $count++;
+}
+if ($result['ext_thy']){
+   $Extranodal_sites .= $result['ext_thy'] . " , ";
+   $count++;
+}
+if ($result['ext_eye']){
+   $Extranodal_sites .= $result['ext_eye'] . " , ";
+   $count++;
+}
+if ($result['ext_lung']){
+   $Extranodal_sites .= $result['ext_lung'] . " , ";
+   $count++;
+}
+if ($result['ext_breast']){
+   $Extranodal_sites .= $result['ext_breast'] . " , ";
+   $count++;
+}
+if ($result['ext_stomach']){
+   $Extranodal_sites .= $result['ext_stomach'] . " , ";
+   $count++;
+}
+if ($result['ext_small']){
+   $Extranodal_sites .= $result['ext_small'] . " , ";
+   $count++;
+}
+if ($result['ext_testis']){
+   $Extranodal_sites .= $result['ext_testis'] . " , ";
+   $count++;
+}
+if ($result['ext_brain']){
+   $Extranodal_sites .= $result['ext_brain'] . " , ";
+   $count++;
+}
+if ($result['ext_liver']){
+   $Extranodal_sites .= $result['ext_liver'] . " , ";
+   $count++;
+}
+if ($result['ext_large']){
+   $Extranodal_sites .= $result['ext_large'] . " , ";
+   $count++;
+}
+if ($result['ext_bone']){
+   $Extranodal_sites .= $result['ext_bone'] . " , ";
+   $count++;
+}
+if ($result['ext_spleen']){
+   $Extranodal_sites .= $result['ext_spleen'] . " , ";
+   $count++;
+}
+if ($result['ext_skin']){
+   $Extranodal_sites .= $result['ext_skin'] . " , ";
+   $count++;
+}
+if ($result['ext_other']){
+   $Extranodal_sites .= $result['ext_other_text'] . " , ";
+   $Extranodal_sites = preg_replace('/,\s+$/', '', $Extranodal_sites);
+   $count_other = preg_split('/,/', $result['ext_other_text']);
+   $count = $count + COUNT($count_other);
+}
+
+$point_ext = 0;
+    if ($count > 1) {
+        $point_ext = 1;
+
+    }
+
+ $Extranodal_sites = preg_replace('/,\s+$/', '', $Extranodal_sites);
+
+
+ // ipi result
+
+$text_ipi = "Low";
+    if ($ipi_age == 1) {
+        $score = $ipi_age + $point_ldh + $point_per_ecog + $point_ann_arbor + $point_ext;
+        if ($score == 2) {
+            $text_ipi = 'Low Intermediate';
+        }
+        if ($score == 3) {
+            $text_ipi = 'High Intermediate';
+        }
+        if ($score > 3) {
+            $text_ipi = 'High';
+        }
+    } else {
+        $score = $ipi_age + $point_ldh + $point_per_ecog + $point_ann_arbor;
+        if ($score == 1) {
+            $text_ipi = 'Low Intermediate';
+        }
+        if ($score == 2) {
+            $text_ipi = 'High Intermediate';
+        }
+        if ($score == 3) {
+            $text_ipi = 'High';
+        }
+    }
+
+
 				
                 /////// Patient Initials
-                if ($patient_initials != "" && $sex != "" && $id_card != "" && $hn != "" && $date_of_birth != "" && $province != "" && $payment != "" && $date_bio_report != "" && $pathology != "" && $biopsy_site != "" && $type != "" && $ann_arbor != "" && $symptom_ann != "" && $per_ecog != "" && $ldh != "" && $hiv_positive != "" ) {
+                if ($result['dateofrecord'] != '' && $result['centre'] != '' && $result['codehos'] != ''  && $result['patient_initials'] != '' && $result['sex'] != '' && $result['id_card'] != '' && $result['id_card_confirm'] != '' &&
+   $result['hn'] != '' && $result['hn_confirm'] != '' && $result['date_of_birth'] != '' && $result['date_bio_report'] != '' && $description_age != '' && $result['province'] != '' && $result['payment'] != '' && $result['pathology'] != '' && $result['pathology_confirm'] != '' &&
+   $result['biopsy_site'] != '' && $result['type'] != '' && ($result['hodgkin_don'] != '' || ($result['type_non'] != '' && ($result['who_sub'] != '' || $result['work_sub'] != '' || $result['other_type'] != ''))) &&
+   $result['ann_arbor'] != '' && $result['symptom_ann'] != '' && $Extranodal_sites != '' &&  $count >= 0 &&  $result['per_ecog'] != '' && $result['ldh'] != '' && $result['micro'] != '' && $result['upper'] != '' &&
+   $result['hemoglobin'] != '' && $result['mcv'] != '' && $result['wbc'] != '' && $result['platelet'] != '' && $result['neutrophil'] != '' && $result['lymphocyte'] != '' && $result['monocyte'] != '' && $result['eosinophil'] != '' && $result['basophil'] != ''  && $result['blast_lymphoma'] != '' &&
+   $result['blast_lymphoma'] != '' && $result['hep_b_hbsag'] != '' && $result['hep_b_anti_hbcab'] != '' && $result['hep_b_anti_hbsab'] != '' && $result['hep_c_anti_hcv'] != '' && $result['status_bulky'] != ''  && $result['hiv_positive'] != '' && $score >= 0 && $text_ipi != '') {
                     $general_show = "complete";
-                } else if ($patient_initials != "") {
-                    $general_show = "incomplete";
                 } else {
-                    $general_show = "No Data";
+                    $general_show = "incomplete";
                 }
                 //*******status2  follow
                 $result_follow = $result['result_follow'];
