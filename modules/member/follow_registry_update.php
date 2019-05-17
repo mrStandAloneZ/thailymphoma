@@ -56,10 +56,17 @@ $date_immun_follow = checkPost("date_immun_follow");
 $immun_select_follow = checkPost("immun_select_follow");
 $radiotherapy_follow = checkPost("radiotherapy_follow");
 
-$rituximab_1 = checkPost("rituximab_1");
-$rituximab_2 = checkPost("rituximab_2");
-$rituximab_3 = checkPost("rituximab_3");
-$rituximab_4 = checkPost("rituximab_4");
+
+if( checkPost("immun_select_follow_rituximab_mabthara_induction") != null){
+   $rituximab_1 = checkPost("immun_select_follow_rituximab_mabthara_induction") . " : " . checkPost("immun_select_follow_rituximab_mabthara_induction_cycle");
+}else{
+   $rituximab_1 = '';
+}
+
+$rituximab_2 = checkPost("immun_select_follow_rituximab_mabthara_maintenance");
+
+$rituximab_3 = checkPost("immun_select_follow_rituximab_generic_induction");
+$rituximab_4 = checkPost("immun_select_follow_rituximab_generic_maintenance");
 if (checkPost("immun_select_follow_sub")) {
     $immun_other_texts = checkPost("immun_select_follow_sub");
     $immun_other_text = '';
@@ -75,11 +82,9 @@ $surgery_follow = checkPost("surgery_follow");
 $date_surgery_follow = checkPost("date_surgery_follow");
 $no_treatment_follow = checkPost("no_treatment_follow");
 $result_follow = checkPost("result_follow");
-if (checkPost("date_complete_follow")) {
-    $date_complete_follow = checkPost("date_complete_follow");
-} else {
+
     $date_complete_follow = checkPost("date_cr_complete_follow");
-}
+
 $result_cause_follow = checkPost("result_cause_follow");
 $progression_follow = checkPost("progression_follow");
 $date_progression_follow = checkPost("date_progression_follow");
@@ -140,6 +145,7 @@ $chemo_follow_28_1 = checkPost("chemo_follow_28_1");
 $chemo_follow_28_2 = checkPost("chemo_follow_28_2");
 $chemo_follow_29 = checkPost("chemo_follow_29");
 $chemo_other_follow_29 = checkPost("chemo_other_follow_29");
+$immunotherapy_follow1 = checkPost("immunotherapy_follow1");
 $sal_immun_1 = checkPost("sal_immun_1");
 $sal_immun_2 = checkPost("sal_immun_2");
 $sal_immun_3 = checkPost("sal_immun_3");

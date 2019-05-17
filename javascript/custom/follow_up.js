@@ -218,11 +218,23 @@ $(document).ready(function() {
       // Rituximab (Mabthara) yes no
       if($('#immun_select_follow1').is(':checked')){
           $('#immun_select_follow1_show').show();
+        if ($("#rituximab_1").is(':checked')){
+          $("#immun_select_follow_rituximab_mabthara_induction_cycle").show();
+          }else{
+          $("#immun_select_follow_rituximab_mabthara_induction_cycle").hide();
+          }
       }else{
           $('#immun_select_follow1_show').hide();
-      }
-  
-      
+       }
+     
+  $('#rituximab_1').change(function () {
+    if ($("#rituximab_1").is(':checked')) {
+      $("#immun_select_follow_rituximab_mabthara_induction_cycle").show();
+    } else {
+      $("#immun_select_follow_rituximab_mabthara_induction_cycle").hide();
+      $("#immun_select_follow_rituximab_mabthara_induction_cycle #retuximab_1_1").val('');
+    }
+  });
   
   
       // Rituximab (Generic) yes no
@@ -241,10 +253,14 @@ $(document).ready(function() {
                $('#rituximab_4').prop('checked', false);
                $('#immun_other_text').val('');
                $('#immun_other_text').prop('disabled', true);
+              $("#immun_select_follow_rituximab_mabthara_induction_cycle").hide();
+              $("#immun_select_follow_rituximab_mabthara_induction_cycle #retuximab_1_1").val('');
             }else if($('#immun_select_follow7').is(':checked')){
               $('#immun_select_follow7_show').show();
               $('#immun_select_follow1_show').hide();
               $('#rituximab_1').prop('checked', false);
+              $("#immun_select_follow_rituximab_mabthara_induction_cycle").hide();
+              $("#immun_select_follow_rituximab_mabthara_induction_cycle #retuximab_1_1").val('');
               $('#rituximab_2').prop('checked', false);
               $('#immun_other_text').val('');
               $('#immun_other_text').prop('disabled', true);
@@ -253,6 +269,8 @@ $(document).ready(function() {
               $('#immun_select_follow1_show').hide();
               $('#immun_select_follow7_show').hide();
               $('#rituximab_1').prop('checked', false);
+              $("#immun_select_follow_rituximab_mabthara_induction_cycle").hide();
+              $("#immun_select_follow_rituximab_mabthara_induction_cycle #retuximab_1_1").val('');
               $('#rituximab_2').prop('checked', false);
               $('#rituximab_3').prop('checked', false);
               $('#rituximab_4').prop('checked', false);
@@ -260,6 +278,8 @@ $(document).ready(function() {
               $('#immun_select_follow1_show').hide();
               $('#immun_select_follow7_show').hide();
               $('#rituximab_1').prop('checked', false);
+              $("#immun_select_follow_rituximab_mabthara_induction_cycle").hide();
+              $("#immun_select_follow_rituximab_mabthara_induction_cycle #retuximab_1_1").val('');
               $('#rituximab_2').prop('checked', false);
               $('#rituximab_3').prop('checked', false);
               $('#rituximab_4').prop('checked', false);
@@ -572,9 +592,10 @@ $(document).ready(function() {
     }
 
     if($('#extranodal_follow').is(':checked')){
-  
+     
       ch_attr(false);
     }else{
+     
       ch_attr(true);
       clear_data_extran();
   
@@ -631,12 +652,35 @@ $(document).ready(function() {
     if($('#extranodal_follow').is(':checked')){
   
       ch_attr(false);
+
+      if ($('#extr_other').is(':checked')) {
+        $('#extr_other_text').attr("disabled", false);
+      } else {
+        $('#extr_other_text').attr("disabled", true);
+      };
     }else{
       ch_attr(true);
       clear_data_extran();
   
     }
   });
+
+  if ($('#extr_other').is(':checked')) {
+    $('#extr_other_text').attr("disabled", false);
+  } else {
+    $('#extr_other_text').attr("disabled", true);
+  };
+
+  $('#extr_other').click(function () {
+    $('#extr_other_text').val('');
+    if ($('#extr_other').is(':checked')) {
+      $('#extr_other_text').attr("disabled", false);
+    }else{
+      $('#extr_other_text').attr("disabled", true);
+    };
+  });
+
+  
   
   function ch_attr(status){
     $('#extr_1_follow').attr("disabled", status);
@@ -707,6 +751,23 @@ $('#salvage_follow_no').click(function(){
  $('#salvage_follow_no_detail').show();
 });
 
+
+  if ($('#chemo_follow_29').is(':checked')) {
+    $('#chemo_other_follow_29').attr("disabled", false);
+  } else {
+    $('#chemo_other_follow_29').attr("disabled", true);
+  };
+
+  $('#chemo_follow_29').click(function () {
+  
+    $('#chemo_other_follow_29').val('');
+    if ($('#chemo_follow_29').is(':checked')) {
+      $('#chemo_other_follow_29').attr("disabled", false);
+    } else {
+      $('#chemo_other_follow_29').attr("disabled", true);
+    };
+  });
+
 function clear_data_salvage(){
   $('#chemo_follow_1').prop('checked', false);
   $('#chemo_follow_2').prop('checked', false);
@@ -737,6 +798,7 @@ function clear_data_salvage(){
   $('#chemo_follow_27').prop('checked', false);
   $('#chemo_follow_28').prop('checked', false);
   $('#chemo_follow_29').prop('checked', false);
+  $('#chemo_other_follow_29').attr('disabled', true);
   $('#chemo_other_follow_29').val('');
   $('#sub_immunotherapy_follow_yes').prop('checked', false);
   $('#sub_immunotherapy_follow_no').prop('checked', false);
@@ -747,6 +809,7 @@ function clear_data_salvage(){
   $('#sal_immun_3_2').prop('checked', false);
   $('#sal_immun_4').prop('checked', false);
   $('#sal_immun_4_text').val('');
+  $('#sal_immun_4_text').attr('disabled', true);
   $('#sal_radio_follow').prop('checked', false);
   $('#sal_surgery_follow').prop('checked', false);
 
@@ -761,6 +824,7 @@ function clear_data_salvage(){
    $('#sub_immunotherapy_detail').show();
 
  }
+ 
 
 $('#sub_immunotherapy_follow_yes').click(function(){
  clear_data_immun();
@@ -774,6 +838,23 @@ $('#sub_immunotherapy_follow_no').click(function(){
  $('#sub_immunotherapy_no_detail').show();
 });
 
+
+  if ($('#sal_immun_4').is(':checked')) {
+    $('#sal_immun_4_text').attr("disabled", false);
+  } else {
+    $('#sal_immun_4_text').attr("disabled", true);
+  };
+
+  $('#sal_immun_4').click(function () {
+  
+    $('#sal_immun_4_text').val('');
+    if ($('#sal_immun_4').is(':checked')) {
+      $('#sal_immun_4_text').attr("disabled", false);
+    } else {
+      $('#sal_immun_4_text').attr("disabled", true);
+    };
+  });
+
 function clear_data_immun(){
  $('#sal_immun_1').prop('checked', false);
  $('#sal_immun_2').prop('checked', false);
@@ -781,6 +862,7 @@ function clear_data_immun(){
  $('#sal_immun_3_1').prop('checked', false);
  $('#sal_immun_3_2').prop('checked', false);
  $('#sal_immun_4').prop('checked', false);
+ $('#sal_immun_4_text').attr('disabled', true);
  $('#sal_immun_4_text').val('');
 }
 
@@ -817,10 +899,26 @@ function clear_data_immun(){
       $('#donor_follow2').prop('checked', false);
       $('#donor_follow3').prop('checked', false);
       $('#donor_follow4').prop('checked', false);
+      $('#donor_follow_other').attr('disabled', true);
       $('#donor_follow_other').val('');
     }
  
 
+
+  if ($('#donor_follow4').is(':checked')) {
+    $('#donor_follow_other').attr("disabled", false);
+  } else {
+    $('#donor_follow_other').attr("disabled", true);
+  };
+
+  $('input[type="radio"][name="donor_follow"]').click(function () {
+    $('#donor_follow_other').val('');
+    if ($('#donor_follow4').is(':checked')) {
+      $('#donor_follow_other').attr("disabled", false);
+    } else {
+      $('#donor_follow_other').attr("disabled", true);
+    };
+  });
 
  
     $('#stem_cell_follow_no_detail').hide();
@@ -842,6 +940,7 @@ function clear_data_immun(){
   });
 
   function clear_data_cell(){
+    $('#stem_cell_method_allogeneic_detail').hide();
     $('#date_stem_cell_follow').val('');
     $('#stem_cell_method_autologous').prop('checked', false);
     $('#stem_cell_method_allogeneic').prop('checked', false);
@@ -883,6 +982,24 @@ $('#status_follow3').click(function(){
   $('#loss_contact').show();
 });
 
+  if ($('#cause_of_dead4').is(':checked')) {
+    $('#cause_of_dead_other').attr('disabled', false);
+  } else {
+    $('#cause_of_dead_other').val('');
+    $('#cause_of_dead_other').attr('disabled', true);
+  };
+
+  $('input[type="radio"][name="cause_of_dead"]').click(function(){
+    if ($('#cause_of_dead4').is(':checked')) {
+      $('#cause_of_dead_other').attr('disabled', false);
+    } else {
+      $('#cause_of_dead_other').val('');
+      $('#cause_of_dead_other').attr('disabled', true);
+    };
+});
+
+
+
 function clear_data_contacty(){
   $('#alive_status1').prop('checked', false);
   $('#alive_status2').prop('checked', false);
@@ -892,11 +1009,13 @@ function clear_data_contacty(){
   $('#cause_of_dead3').prop('checked', false);
   $('#cause_of_dead4').prop('checked', false);
   $('#cause_of_dead_other').val('');
+  $('#cause_of_dead_other').attr('disabled' , true);
 
   $('#lymphoma_status1').prop('checked', false);
   $('#lymphoma_status2').prop('checked', false);
   $('#lymphoma_status3').prop('checked', false);
 }
+
 
 
 

@@ -30,9 +30,9 @@ $result=mysqli_query($con,$sql);
 // Associative array
 $dbarr=mysqli_fetch_assoc($result);
 
-echo '<pre>';
-  print_r($dbarr);
-echo '</pre>';
+// echo '<pre>';
+//   print_r($dbarr);
+// echo '</pre>';
 
 // declare variable
 foreach($dbarr as $key => $value){
@@ -634,20 +634,32 @@ tr.color > td {
                                 <table width="500" border="0" cellpadding="0" cellspacing="0" >
                                   <tr class="color" >
                                      <td>
-                                       <input name="immun_select_follow_sub[z-index]" 
+                                       <input name="immun_select_follow_rituximab_mabthara_induction" 
                                               id="rituximab_1" 
                                               type="checkbox"  
-                                              value="Rituximab(Mabthara)Induction" 
-                                              <?php if (strlen(strstr($immun_other_text, "Rituximab(Mabthara)Induction")) > 0) {
+                                              value="Induction" 
+                                              <?php if ($rituximab_1 != '') {
                                                 echo "checked";
                                               }?> 
                                         />  Induction <br/><br/>
-                                        cycle : <input input type="text"  /><br/>
-                                       <input name="immun_select_follow_sub[z-index]"  
+                                       <div id ="immun_select_follow_rituximab_mabthara_induction_cycle">
+                                        cycle : <input type="text" 
+                                                       id="retuximab_1_1" 
+                                                       name ='immun_select_follow_rituximab_mabthara_induction_cycle' 
+                                                       value = 
+                                                       <?php
+                                                          if ($rituximab_1 != '') {
+                                                             echo preg_replace('/([\w\d]+) : ([\w\d]+)/', '$2', $rituximab_1);
+                                                          }
+                                                       ?>  
+                                         />
+                                      </div>
+                                        <br/>
+                                       <input name="immun_select_follow_rituximab_mabthara_maintenance"  
                                               id="rituximab_2" 
                                               type="checkbox"  
-                                              value="Rituximab(Mabthara)Maintenance" 
-                                              <?php if (strlen(strstr($immun_other_text, "Rituximab(Mabthara)Maintenance")) > 0) {
+                                              value="Maintenance" 
+                                              <?php if ($rituximab_2 != '') {
                                                   echo "checked";
                                               }?> 
                                         />  Maintenance <br/><br/>
@@ -677,19 +689,19 @@ tr.color > td {
                       <table width="500" border="0" cellpadding="0" cellspacing="0" >
                         <tr class="color" >
                           <td>
-                          <input name="immun_select_follow_sub[z-index]" 
+                          <input name="immun_select_follow_rituximab_generic_induction" 
                                   id="rituximab_3" 
                                   type="checkbox"  
-                                  value="Rituximab(Generic)Induction" 
-                                  <?php if (strlen(strstr($immun_other_text, "Rituximab(Generic)Induction")) > 0) {
+                                  value="Induction" 
+                                  <?php if ($rituximab_3 != '') {
                                       echo "checked";
                                   }?> 
                           />  Induction 
-                          <input name="immun_select_follow_sub[z-index]"  
+                          <input name="immun_select_follow_rituximab_generic_maintenance"  
                                 id="rituximab_4" 
                                 type="checkbox"  
-                                value="Rituximab(Generic)Maintenance" <?php
-                                    if (strlen(strstr($immun_other_text, "Rituximab(Generic)Maintenance")) > 0) {
+                                value="Maintenance" <?php
+                                    if ($rituximab_4 != '') {
                                         echo "checked";
                                     }?> 
                           />  Maintenance
@@ -930,7 +942,11 @@ tr.color > td {
                name="date_cr_complete_follow" 
                id="date_cr_complete_follow" 
                size="10" 
-               value="<?php echo $date_complete_follow; ?>" 
+               value="<?php
+                   if($result_follow == "Complete response (CR)"){
+                         echo $date_complete_follow; 
+                   }
+                ?>" 
          /> (Example: 31-12-(¾.È.)2500) <br /><br />
       </td>
     </tr>
@@ -956,7 +972,12 @@ tr.color > td {
       <input type="text" 
              name="date_complete_follow" 
              id="date_complete_follow" 
-             size="10" value="<?php echo $date_complete_follow; ?>"  
+             size="10" 
+             value="<?php
+                   if($result_follow == "Complete response (uncomfirmed) (CRu)"){
+                         echo $date_complete_follow; 
+                   }
+                ?>" 
       />&nbsp;&nbsp;&nbsp;    (Example: 31-12-(¾.È.)2500)
     </td>
   </tr>
@@ -1844,7 +1865,7 @@ Indeterminate (ID)<br /><br />
           <input name="donor_follow" 
                  type="radio"  
                  id="donor_follow4" 
-                 value="Other" <?php if ($donor == 'Other') {
+                 value="Other" <?php if ($donor_follow == 'Other') {
                           echo "checked";
                       }?> 
           /> Other  <br /><br />
