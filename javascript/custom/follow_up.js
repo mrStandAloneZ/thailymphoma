@@ -642,13 +642,14 @@ $(document).ready(function() {
     $('#extr_17_follow').prop('checked', false);
     $('#extr_other').prop('checked', false);
     $('#extr_other_text').val('');
-
+    ch_attr(true);
+    clear_data_extran();
   }
 
   
 
   $('#extranodal_follow').click(function(){
-
+  
     if($('#extranodal_follow').is(':checked')){
   
       ch_attr(false);

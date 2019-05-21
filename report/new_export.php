@@ -60,8 +60,6 @@ $columns = array(
 "Date of record",
 "Code",
 "Status 1 (First entry)",
-// "Check Count",
-// "Check Status",
 "Patient Initials",
 "Gender",
 "Personal ID",
@@ -214,6 +212,8 @@ foreach( $columns as $key => $value){
     
 }
 
+
+
 foreach( $data as $key => $value){
 
 // date of record
@@ -229,24 +229,24 @@ $data_for_export[$key]['B1'] = $centre;
 // $data_for_export[$key]['E1'] = 'check status *remove';
 
 
-$data_for_export[$key]['F1'] = $value['patient_initials'];
-$data_for_export[$key]['G1'] = $value['sex'];
-$data_for_export[$key]['H1'] = $value['id_card_confirm'];
-$data_for_export[$key]['I1'] = $value['hn'];
+$data_for_export[$key]['D1'] = $value['patient_initials'];
+$data_for_export[$key]['E1'] = $value['sex'];
+$data_for_export[$key]['F1'] = $value['id_card_confirm'];
+$data_for_export[$key]['G1'] = $value['hn'];
 
 // Date of Birth
 $date_of_birth = preg_replace('/(\d{4})\-(\d{2})\-(\d{2})/', '$3/$2/$1', $value['date_of_birth']);
-$data_for_export[$key]['J1'] = $date_of_birth;
+$data_for_export[$key]['H1'] = $date_of_birth;
 
-$data_for_export[$key]['K1'] = $value['province'];
-$data_for_export[$key]['L1'] = $value['payment'];
+$data_for_export[$key]['I1'] = $value['province'];
+$data_for_export[$key]['J1'] = $value['payment'];
 
 // Date of Biospy
 $date_bio_report = preg_replace('/(\d{2})\-(\d{2})\-(\d{4})/', '$1/$2/$3', $value['date_bio_report']);
-$data_for_export[$key]['M1'] = $date_bio_report;
+$data_for_export[$key]['K1'] = $date_bio_report;
 
-$data_for_export[$key]['N1'] = $value['pathology_confirm'];
-$data_for_export[$key]['O1'] = $value['biopsy_site'];
+$data_for_export[$key]['L1'] = $value['pathology_confirm'];
+$data_for_export[$key]['M1'] = $value['biopsy_site'];
 if($value['type'] == "HL"){
   $type = 'Yes';
   $hodgkin_don = $value['hodgkin_don'];
@@ -254,14 +254,14 @@ if($value['type'] == "HL"){
   $type = 'No';
   $hodgkin_don = '';
 }
-$data_for_export[$key]['P1'] = $type;
-$data_for_export[$key]['Q1'] = $hodgkin_don;
-$data_for_export[$key]['R1'] = $value['type_non'];
-$data_for_export[$key]['S1'] = $value['who_sub'];
-$data_for_export[$key]['T1'] = $value['work_sub'];
-$data_for_export[$key]['U1'] = $value['other_type'];
-$data_for_export[$key]['V1'] = $value['ann_arbor'];
-$data_for_export[$key]['W1'] = $value['symptom_ann'];
+$data_for_export[$key]['N1'] = $type;
+$data_for_export[$key]['O1'] = $hodgkin_don;
+$data_for_export[$key]['P1'] = $value['type_non'];
+$data_for_export[$key]['Q1'] = $value['who_sub'];
+$data_for_export[$key]['R1'] = $value['work_sub'];
+$data_for_export[$key]['S1'] = $value['other_type'];
+$data_for_export[$key]['T1'] = $value['ann_arbor'];
+$data_for_export[$key]['U1'] = $value['symptom_ann'];
 
 // Extranodal sites : (mark all that apply):
 $Extranodal_sites = '';
@@ -349,31 +349,31 @@ $point_ext = 0;
 
  $Extranodal_sites = preg_replace('/,\s+$/', '', $Extranodal_sites);
 
-$data_for_export[$key]['X1'] = $Extranodal_sites;
-$data_for_export[$key]['Y1'] = $count;
+$data_for_export[$key]['V1'] = $Extranodal_sites;
+$data_for_export[$key]['W1'] = $count;
 
-$data_for_export[$key]['Z1'] = $value['per_ecog'];
-$data_for_export[$key]['AA1'] = $value['ldh'];
-$data_for_export[$key]['AB1'] = $value['hiv_positive'];
-$data_for_export[$key]['AC1'] = $value['micro'];
-$data_for_export[$key]['AD1'] = $value['upper'];
-$data_for_export[$key]['AE1'] = $value['hemoglobin'];
-$data_for_export[$key]['AF1'] = $value['mcv'];
-$data_for_export[$key]['AG1'] = $value['wbc'];
-$data_for_export[$key]['AH1'] = $value['platelet'];
-$data_for_export[$key]['AI1'] = $value['neutrophil'];
-$data_for_export[$key]['AJ1'] = $value['lymphocyte'];
-$data_for_export[$key]['AK1'] = $value['monocyte'];
-$data_for_export[$key]['AL1'] = $value['eosinophil'];
-$data_for_export[$key]['AM1'] = $value['basophil'];
-$data_for_export[$key]['AN1'] = $value['luc'];
-$data_for_export[$key]['AO1'] = $value['blast_lymphoma'];
-$data_for_export[$key]['AP1'] = $value['hep_b_hbsag'];
-$data_for_export[$key]['AQ1'] = $value['hep_b_anti_hbcab'];
-$data_for_export[$key]['AR1'] = $value['hep_b_anti_hbsab'];
-$data_for_export[$key]['AS1'] = $value['hep_c_anti_hcv'];
-$data_for_export[$key]['AT1'] = $value['bulky'];
-$data_for_export[$key]['AU1'] = $value['status_bulky'];
+$data_for_export[$key]['X1'] = $value['per_ecog'];
+$data_for_export[$key]['Y1'] = $value['ldh'];
+$data_for_export[$key]['Z1'] = $value['hiv_positive'];
+$data_for_export[$key]['AA1'] = $value['micro'];
+$data_for_export[$key]['AB1'] = $value['upper'];
+$data_for_export[$key]['AC1'] = $value['hemoglobin'];
+$data_for_export[$key]['AD1'] = $value['mcv'];
+$data_for_export[$key]['AE1'] = $value['wbc'];
+$data_for_export[$key]['AF1'] = $value['platelet'];
+$data_for_export[$key]['AG1'] = $value['neutrophil'];
+$data_for_export[$key]['AH1'] = $value['lymphocyte'];
+$data_for_export[$key]['AI1'] = $value['monocyte'];
+$data_for_export[$key]['AJ1'] = $value['eosinophil'];
+$data_for_export[$key]['AK1'] = $value['basophil'];
+$data_for_export[$key]['AL1'] = $value['luc'];
+$data_for_export[$key]['AM1'] = $value['blast_lymphoma'];
+$data_for_export[$key]['AN1'] = $value['hep_b_hbsag'];
+$data_for_export[$key]['AO1'] = $value['hep_b_anti_hbcab'];
+$data_for_export[$key]['AP1'] = $value['hep_b_anti_hbsab'];
+$data_for_export[$key]['AQ1'] = $value['hep_c_anti_hcv'];
+$data_for_export[$key]['AR1'] = $value['bulky'];
+$data_for_export[$key]['AS1'] = $value['status_bulky'];
 
 // Calculate Age
 
@@ -391,8 +391,8 @@ if($age < 60){
     $ipi_age = 1;
 }
 
-$data_for_export[$key]['AV1'] = $ipi_age;
-$data_for_export[$key]['AW1'] = $description_age;
+$data_for_export[$key]['AT1'] = $ipi_age;
+$data_for_export[$key]['AU1'] = $description_age;
 
  // ldh
 
@@ -403,8 +403,8 @@ $data_for_export[$key]['AW1'] = $description_age;
         $point_ldh = 0;
     }
 
-$data_for_export[$key]['AX1'] = $point_ldh;
-$data_for_export[$key]['AY1'] = 'Selected' . $value["ldh"];
+$data_for_export[$key]['AV1'] = $point_ldh;
+$data_for_export[$key]['AW1'] = 'Selected' . $value["ldh"];
 
 // per_echog
 
@@ -413,8 +413,8 @@ $point_per_ecog = 0;
         $point_per_ecog = 1;
     }
 
-$data_for_export[$key]['AZ1'] = $point_per_ecog;
-$data_for_export[$key]['BA1'] = 'Selected' . $value["per_ecog"];
+$data_for_export[$key]['AX1'] = $point_per_ecog;
+$data_for_export[$key]['AY1'] = 'Selected' . $value["per_ecog"];
 
 // ann_arbor
 
@@ -430,8 +430,8 @@ $point_ann_arbor = '';
     }
 
 
-$data_for_export[$key]['BB1'] = $point_ann_arbor;
-$data_for_export[$key]['BC1'] = $description_stage;
+$data_for_export[$key]['AZ1'] = $point_ann_arbor;
+$data_for_export[$key]['BA1'] = $description_stage;
 
 // Extranodal Involvement
 
@@ -443,8 +443,8 @@ $result_num = 0;
       }
 	   $extranodal_involvement = $result_num."  (Selected ".$count." items)" . "  **Check again**";
 
-$data_for_export[$key]['BD1'] = $extranodal_involvement;
-$data_for_export[$key]['BE1'] = $Extranodal_sites;
+$data_for_export[$key]['BB1'] = $extranodal_involvement;
+$data_for_export[$key]['BC1'] = $Extranodal_sites;
 
 // ipi result
 
@@ -473,8 +473,8 @@ $text_ipi = "Low";
         }
     }
     
-$data_for_export[$key]['BF1'] = $score . " Point";
-$data_for_export[$key]['BG1'] = $text_ipi . " Risk";
+$data_for_export[$key]['BD1'] = $score . " Point";
+$data_for_export[$key]['BE1'] = $text_ipi . " Risk";
 
 
 // Status 1 (First Entry)
@@ -494,8 +494,36 @@ if($value['dateofrecord'] != '' && $value['centre'] != '' && $value['codehos'] !
 }
 $data_for_export[$key]['C1'] = $status_first_entry;
 
-                                             // Follow
-$data_for_export[$key]['BH1'] = $value['date_record_follow'];
+                       ////////////// // Follow_Up //////////////////////
+
+
+// Follow Status
+
+$status_follow = '';
+if($value['date_record_follow'] != '' && 
+((($value['chemotherapy_follow'] == 'No Chemotherapy' || ($value['chemotherapy_follow'] == 'Chemotherapy' && $value['date_chemo_follow'] != '' && (($value['chemo_select_follow'] == 'Other' && $value['chemo_select_follow_other'] != '' ) || $value['chemo_select_follow'] != '' ) && $value['received_follow'] != '' ) ) &&
+  ($value['immunotherapy_follow'] == 'Immunotherapy_no' || ($value['immunotherapy_follow'] == 'Immunotherapy' && $value['date_immun_follow'] != '' &&  (($value['immun_select_follow'] == 'Rituximab(Mabthara)' && ($value['rituximab_1'] != '' || $value['rituximab_2'] != '')) || ($value['immun_select_follow'] == 'Rituximab(Generic)' && ($value['rituximab_3'] != '' || $value['rituximab_4'] != '') ) || ($value['immun_select_follow'] == 'Other' && $value['immun_other_text'] != '') || ($value['immun_select_follow'] == 'Obinutuzumab') || ($value['immun_select_follow'] == 'Brentuximab') || ($value['immun_select_follow'] == 'Ibritumomab') || ($value['immun_select_follow'] == 'Alemtuzumab') ) )) &&
+  ($value['radiotherapy_follow'] == 'Radiotherapy_no' || ($value['radiotherapy_follow'] == 'Radiotherapy' && $value['date_rad_follow'] != '') ) &&
+  ($value['surgery_follow'] == 'no' || ($value['radiotherapy_follow'] == 'yes' && $value['date_surgery_follow'] != ''))
+ ) || $value['no_treatment_follow'] != '' ) &&
+ ( (($value['result_follow'] == 'Complete response (CR)' || $value['result_follow'] == 'Complete response (uncomfirmed) (CRu)') && $value['date_complete_follow'] != '') || ($value['result_follow'] == 'Indeterminate (ID)' && $value['result_cause_follow'] != '') || ($value['result_follow'] == 'Partial response (PR)') || ($value['result_follow'] == 'Stable disease (SD)') || ($value['result_follow'] == 'Progressive disease (PD)') ) &&
+ ( $value['progression_follow'] == 'No' || ( $value['progression_follow'] == 'Yes' && $value['date_progression_follow'] != '' && $value['histology_follow'] != '' || ($value['lymph node'] != '') || ($value['extranodal_follow'] != '' && ( $value['extr_1_follow'] != '' || $value['extr_2_follow'] != '' || $value['extr_3_follow'] != '' || $value['extr_4_follow'] != '' || $value['extr_5_follow'] != '' || $value['extr_6_follow'] != '' || $value['extr_7_follow'] != '' || $value['extr_8_follow'] != '' || $value['extr_9_follow'] != '' || $value['extr_10_follow'] != '' || $value['extr_11_follow'] != '' || $value['extr_12_follow'] != '' || $value['extr_13_follow'] != '' || $value['extr_14_follow'] != '' || $value['extr_15_follow'] != '' || $value['extr_16_follow'] != '' || $value['extr_17_follow'] != '' || ($value['extr_other'] != '' && $value['extr_other_text'] != '' ) ) ) ) ) &&
+ ( $value['salvage_follow'] == 'No' || ( $value['salvage_follow'] == 'Yes' && ( $value['chemo_follow_1'] != '' || $value['chemo_follow_2'] != '' || $value['chemo_follow_3'] != '' || $value['chemo_follow_4'] != '' || $value['chemo_follow_5'] != '' || $value['chemo_follow_6'] != '' || $value['chemo_follow_7'] != '' || $value['chemo_follow_8'] != '' || $value['chemo_follow_9'] != '' || $value['chemo_follow_10'] != '' || $value['chemo_follow_11'] != '' || $value['chemo_follow_12'] != '' || $value['chemo_follow_13'] != '' || $value['chemo_follow_14'] != '' || $value['chemo_follow_15'] != '' || $value['chemo_follow_16'] != '' || $value['chemo_follow_17'] != '' || $value['chemo_follow_18'] != '' || $value['chemo_follow_19'] != '' || $value['chemo_follow_20'] != '' || $value['chemo_follow_21'] != '' || $value['chemo_follow_22'] != '' || $value['chemo_follow_23'] != '' || $value['chemo_follow_24'] != '' || $value['chemo_follow_25'] != '' || $value['chemo_follow_26'] != '' || $value['chemo_follow_27'] != '' || $value['chemo_follow_28'] != '' || $value['chemo_follow_28_1'] != '' || $value['chemo_follow_28_2'] != '' || ($value['chemo_follow_29'] != '' && $value['chemo_follow_29_1'] != '') ) &&
+      ( $value['immunotherapy_follow1'] == 'No' || ( $value['immunotherapy_follow1'] == 'Yes' && ( $value['sal_immun_1'] != '' || $value['sal_immun_2'] != '' || $value['sal_immun_3'] != '' || $value['sal_immun_3_1'] != '' || $value['sal_immun_3_2'] != '' || ($value['sal_immun_4'] != '' && $value['sal_immun_4_text'] != '' )  ) ) ) || $value['sal_radio_follow'] != '' || $value['sal_surgery_follow'] != '' ) ) &&
+ ( $value['stem_cell_follow'] == 'No' ||  ( $value['stem_cell_follow'] == 'Yes' && $value['date_stem_cell_follow'] != '' && ( $value['stem_cell_method'] == 'Autologous' || ( $value['stem_cell_method'] == 'Allogeneic' && $value['conditioning'] != '' && ( ( $value['donor_follow'] == 'Other' && $value['donor_follow_other'] != '' ) || ( $value['donor_follow'] != '' )  ) ) ) ) ) &&
+ ( $value['date_last_contact_follow'] != '' && ( ( $value['status_follow'] == 'Alive' && $value['alive_status'] != ''  ) || ( $value['status_follow'] == 'Dead' && $value['date_dead_follow'] != '' && ( ( $value['cause_of_dead'] == 'Other' && $value['cause_of_dead_other'] != 'Other' ) || ( $value['cause_of_dead'] != '' ) ) && $value['lymphoma_status'] != '' ) || $value['status_follow'] == 'Loss to follow-up' ) )
+){
+
+   $status_follow = 'Complete';
+}else{
+   $status_follow = 'Incomplete';
+}
+
+$data_for_export[$key]['BF1'] = $status_follow;
+
+
+
+$data_for_export[$key]['BG1'] = $value['date_record_follow'];
 
 // chemotherapy
 if($value['chemotherapy_follow'] == 'Chemotherapy'){
@@ -503,18 +531,18 @@ if($value['chemotherapy_follow'] == 'Chemotherapy'){
 }elseif($value['chemotherapy_follow'] == 'No Chemotherapy'){
      $chemotherapy_follow = 'No';
 }
-$data_for_export[$key]['BI1'] = $chemotherapy_follow;
+$data_for_export[$key]['BH1'] = $chemotherapy_follow;
 
-$data_for_export[$key]['BJ1'] = $value['date_chemo_follow'];
+$data_for_export[$key]['BI1'] = $value['date_chemo_follow'];
 
 if($value['chemo_select_follow' != 'other']){
    $chemo_select_follow = $value['chemo_select_follow'];
 }else{
    $chemo_select_follow = $value['chemo_select_follow_other'];
 };
-$data_for_export[$key]['BK1'] = $chemo_select_follow;
+$data_for_export[$key]['BJ1'] = $chemo_select_follow;
 
-$data_for_export[$key]['BL1'] = $value['received_follow'];
+$data_for_export[$key]['BK1'] = $value['received_follow'];
 
 // Immunotherapy
 if($value['immunotherapy_follow'] == 'Immunotherapy'){
@@ -522,16 +550,16 @@ if($value['immunotherapy_follow'] == 'Immunotherapy'){
 }elseif($value['immunotherapy_follow'] == 'Immunotherapy_no'){
      $immunotherapy_follow = 'No';
 }
-$data_for_export[$key]['BM1'] = $immunotherapy_follow;
+$data_for_export[$key]['BL1'] = $immunotherapy_follow;
 
-$data_for_export[$key]['BN1'] = $value['date_immun_follow'];
+$data_for_export[$key]['BM1'] = $value['date_immun_follow'];
 
 if(preg_match('/Rituximab|Other/', $value['immun_select_follow'] )){
    $immun_select_follow = $value['immun_other_text'];
 }else{
    $immun_select_follow = $value['immun_select_follow'];
 }
-$data_for_export[$key]['BO1'] = $immun_select_follow;
+$data_for_export[$key]['BN1'] = $immun_select_follow;
 
 // Radiotherapy
 if($value['radiotherapy_follow'] == 'Radiotherapy'){
@@ -539,18 +567,18 @@ if($value['radiotherapy_follow'] == 'Radiotherapy'){
 }elseif($value['radiotherapy_follow'] == 'Radiotherapy_no'){
      $radiotherapy_follow = 'No';
 }
-$data_for_export[$key]['BP1'] = $radiotherapy_follow;
+$data_for_export[$key]['BO1'] = $radiotherapy_follow;
 
-$data_for_export[$key]['BQ1'] = $value['date_rad_follow'];
+$data_for_export[$key]['BP1'] = $value['date_rad_follow'];
 
 
 // Surgery
-$data_for_export[$key]['BR1'] = $value['surgery_follow'];
-$data_for_export[$key]['BS1'] = $value['date_surgery_follow'];
+$data_for_export[$key]['BQ1'] = $value['surgery_follow'];
+$data_for_export[$key]['BR1'] = $value['date_surgery_follow'];
 
 
 // Clinical Outcome
-$data_for_export[$key]['BT1'] = $value['result_follow'];
+$data_for_export[$key]['BS1'] = $value['result_follow'];
 
 if(preg_match('/Complete response/', $value['result_follow'])){
   $additional = $value['date_complete_follow'];
@@ -559,16 +587,16 @@ if(preg_match('/Complete response/', $value['result_follow'])){
 }else{
   $additional = '';
 }
-$data_for_export[$key]['BU1'] = $additional;
+$data_for_export[$key]['BT1'] = $additional;
 
 // Progression/relapse
-$data_for_export[$key]['BV1'] = $value['progression_follow'];
+$data_for_export[$key]['BU1'] = $value['progression_follow'];
 
-$data_for_export[$key]['BW1'] = $value['date_progression_follow'];
+$data_for_export[$key]['BV1'] = $value['date_progression_follow'];
 
-$data_for_export[$key]['BX1'] = $value['history_follow'];
+$data_for_export[$key]['BW1'] = $value['history_follow'];
 
-$data_for_export[$key]['BY1'] = $value['lymph node'];
+$data_for_export[$key]['BX1'] = $value['lymph node'];
 
 
 if($value['extranodal_follow'] == 'Extranodal sites') {
@@ -631,12 +659,12 @@ if ($value['extr_other_text']){
 $extranodal_follow = preg_replace('/,\s+$/', '', $extranodal_follow);
 
 }
-$data_for_export[$key]['BZ1'] = $extranodal_follow;
+$data_for_export[$key]['BY1'] = $extranodal_follow;
 
 
 // Salvage treatment Salvage regimen (mark all that apply)
 
-$data_for_export[$key]['CA1'] = $value['salvage_follow'];
+$data_for_export[$key]['BZ1'] = $value['salvage_follow'];
 
 if($value['salvage_follow'] == 'Yes'){
  // chemo
@@ -740,11 +768,11 @@ $salvage_follow = '';
    $salvage_follow = preg_replace('/,\s+$/', '', $salvage_follow);
 
 if($salvage_follow != ''){
-   $data_for_export[$key]['CB1'] = 'Yes';
-   $data_for_export[$key]['CC1'] = $salvage_follow;
+   $data_for_export[$key]['CA1'] = 'Yes';
+   $data_for_export[$key]['CB1'] = $salvage_follow;
 }else{
-    $data_for_export[$key]['CB1'] = 'No';
-    $data_for_export[$key]['CC1'] = '';
+    $data_for_export[$key]['CA1'] = 'No';
+    $data_for_export[$key]['CB1'] = '';
 }
 // immuno
 $salvage_immunotherapy = '';
@@ -768,74 +796,82 @@ if($value['sal_immun_4']){
 }
 $salvage_immunotherapy = preg_replace('/,\s+$/', '', $salvage_immunotherapy);
 if($salvage_immunotherapy != ''){
-   $data_for_export[$key]['CD1'] = 'Yes';
-   $data_for_export[$key]['CE1'] = $salvage_immunotherapy;
+   $data_for_export[$key]['CC1'] = 'Yes';
+   $data_for_export[$key]['CD1'] = $salvage_immunotherapy;
 }else{
-   $data_for_export[$key]['CD1'] = 'No';
-   $data_for_export[$key]['CE1'] = '';
+   $data_for_export[$key]['CC1'] = 'No';
+   $data_for_export[$key]['CD1'] = '';
 }
 
 //Radio
     
     if($value['sal_radio_follow'] == 'Radiotherapy'){
-         $data_for_export[$key]['CF1'] = 'Yes';
+         $data_for_export[$key]['CE1'] = 'Yes';
     }else{
-         $data_for_export[$key]['CF1'] = 'No';
+         $data_for_export[$key]['CE1'] = 'No';
     }
 //Surgery
     
     if($value['sal_surgery_follow'] == 'Surgery'){
-         $data_for_export[$key]['CG1'] = 'Yes';
+         $data_for_export[$key]['CF1'] = 'Yes';
     }else{
-         $data_for_export[$key]['CG1'] = 'No';
+         $data_for_export[$key]['CF1'] = 'No';
     }
 
 }else{ // no
-    $data_for_export[$key]['CB1'] = 'No';
-    $data_for_export[$key]['CC1'] = '';
-    $data_for_export[$key]['CD1'] = 'No';
-    $data_for_export[$key]['CE1'] = '';
+    $data_for_export[$key]['CA1'] = 'No';
+    $data_for_export[$key]['CB1'] = '';
+    $data_for_export[$key]['CC1'] = 'No';
+    $data_for_export[$key]['CD1'] = '';
+    $data_for_export[$key]['CE1'] = 'No';
     $data_for_export[$key]['CF1'] = 'No';
-    $data_for_export[$key]['CG1'] = 'No';
 }
 
 // Stem cell transplant
 
-$data_for_export[$key]['CH1'] = $value['stem_cell_follow'];
+$data_for_export[$key]['CG1'] = $value['stem_cell_follow'];
 
 if($value['stem_cell_follow'] == 'Yes'){
-     $data_for_export[$key]['CI1'] = $value['date_stem_cell_follow'];
-     $data_for_export[$key]['CJ1'] = $value['stem_cell_method'];
+     $data_for_export[$key]['CH1'] = $value['date_stem_cell_follow'];
+     $data_for_export[$key]['CI1'] = $value['stem_cell_method'];
      if($value['stem_cell_method'] == 'Allogeneic'){
-         $data_for_export[$key]['CK1'] = $value['conditioning'];
+         $data_for_export[$key]['CJ1'] = $value['conditioning'];
          if($value['donor_follow'] == 'Other'){
-             $data_for_export[$key]['CL1'] = $value['donor_follow_other'];
+             $data_for_export[$key]['CK1'] = $value['donor_follow_other'];
          }else{
-             $data_for_export[$key]['CL1'] = $value['donor_follow'];
+             $data_for_export[$key]['CK1'] = $value['donor_follow'];
          }
      }
 }else{
+       $data_for_export[$key]['CH1'] = '';
        $data_for_export[$key]['CI1'] = '';
        $data_for_export[$key]['CJ1'] = '';
        $data_for_export[$key]['CK1'] = '';
-       $data_for_export[$key]['CL1'] = '';
 }
 
 // Date of last Contact
-$data_for_export[$key]['CM1'] = $value['status_follow'];
-$data_for_export[$key]['CN1'] = $value['date_last_contact_follow'];
-
-if($value['status_follow'] == 'Alive'){
-   $data_for_export[$key]['CO1'] = $value['alive_status'];
-}elseif($value['status_follow'] == 'Dead') {
-   $data_for_export[$key]['CP1'] = $value['date_dead_follow'];
-   if($value['cause_of_dead'] == 'Other'){
-      $data_for_export[$key]['CQ1'] = $value['cause_of_dead_other'];
+$data_for_export[$key]['CL1'] = $value['status_follow'];
+$data_for_export[$key]['CM1'] = $value['date_last_contact_follow'];
+$data_for_export[$key]['CN1'] = $value['alive_status'];
+$data_for_export[$key]['CO1'] = $value['date_dead_follow'];
+if($value['cause_of_dead'] == 'Other'){
+      $data_for_export[$key]['CP1'] = $value['cause_of_dead_other'];
    }else{
-      $data_for_export[$key]['CQ1'] = $value['cause_of_dead'];
+      $data_for_export[$key]['CP1'] = $value['cause_of_dead'];
    }
-   $data_for_export[$key]['CR1'] = $value['lymphoma_status'];
-}
+$data_for_export[$key]['CQ1'] = $value['lymphoma_status'];
+
+// if($value['status_follow'] == 'Alive'){
+//    $data_for_export[$key]['CN1'] = $value['alive_status'];
+// }elseif($value['status_follow'] == 'Dead') {
+//    $data_for_export[$key]['CO1'] = $value['date_dead_follow'];
+//    if($value['cause_of_dead'] == 'Other'){
+//       $data_for_export[$key]['CP1'] = $value['cause_of_dead_other'];
+//    }else{
+//       $data_for_export[$key]['CP1'] = $value['cause_of_dead'];
+//    }
+//    $data_for_export[$key]['CQ1'] = $value['lymphoma_status'];
+// }
 
 
 
